@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "editorjs__list.d.ts"  ]
 }

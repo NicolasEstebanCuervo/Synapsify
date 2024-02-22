@@ -20,12 +20,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:storybook/recommended"
     ]
   },
   "browserslist": {
@@ -39,5 +42,42 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@editorjs/code": "^2.9.0",
+    "@editorjs/delimiter": "^1.4.0",
+    "@editorjs/editorjs": "^2.29.0",
+    "@editorjs/embed": "^2.7.0",
+    "@editorjs/header": "^2.8.1",
+    "@editorjs/image": "^2.9.0",
+    "@editorjs/list": "^1.9.0",
+    "@editorjs/marker": "^1.4.0",
+    "@editorjs/quote": "^2.6.0",
+    "@editorjs/raw": "^2.5.0",
+    "@editorjs/table": "^2.3.0",
+    "@editorjs/warning": "^1.4.0",
+    "@emotion/styled": "^11.11.0",
+    "@storybook/addon-essentials": "^7.6.13",
+    "@storybook/addon-interactions": "^7.6.13",
+    "@storybook/addon-links": "^7.6.13",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "^7.6.13",
+    "@storybook/preset-create-react-app": "^7.6.13",
+    "@storybook/react": "^7.6.13",
+    "@storybook/react-webpack5": "^7.6.13",
+    "@storybook/test": "^7.6.13",
+    "@types/uuid": "^9.0.8",
+    "bootstrap": "^5.3.2",
+    "cypress": "^13.6.4",
+    "eslint-plugin-storybook": "^0.6.15",
+    "prop-types": "^15.8.1",
+    "react-bootstrap": "^2.10.1",
+    "react-editor-js": "^2.1.0",
+    "react-markdown": "^9.0.1",
+    "react-quill": "^2.0.0",
+    "react-router-dom": "^6.22.0",
+    "storybook": "^7.6.13",
+    "uuid": "^9.0.1",
+    "webpack": "^5.90.1"
   }
 }

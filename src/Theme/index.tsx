@@ -1,0 +1,13 @@
+export const primaryColor = "#1A1A1A";
+export const secondaryColor = "#293137";
+export const tertiaryColor = "#5E83F2";
+export const placeHolderColor = "#282A2A";
+export const borderInputColor = "#2A2C2C ";
+export const linkColorHover = " #64646d";
+export const ButtonBlack = " #1e293b";
+export const borderTicket = "#888686 ";
+export const whiteColor = "#ffffff ";
+export const grayColor = "#4D5466 ";
+export const backgroundTableTitles = "#292929";
+export const textColor = "#F2F2F2 ";
+export const textColorGray = "#b2b5b6";
