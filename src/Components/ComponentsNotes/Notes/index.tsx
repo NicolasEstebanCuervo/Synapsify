@@ -9,7 +9,7 @@ export const Notes = () => {
             {notes.map((note, index) => (
                 <ContainerNote>
                 <Note
-                    assignee={note.assigneNote}
+                    assignee={note.assigneeNote}
                     note={note}
                     number={index + 1}
                     key={note.idNote}

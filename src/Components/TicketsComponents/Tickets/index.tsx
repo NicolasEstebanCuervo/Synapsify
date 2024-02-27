@@ -18,25 +18,26 @@ export const Tickets = ({ idFilter }: { idFilter?: string | undefined }) => {
                     <SubtitleTicketsList>Last tickets</SubtitleTicketsList>
                     <UnorderedList>
                         {tickets.map((ticket) => (
-                            <ListItem key={ticket.idTicket}>{ticket.titleTicket}</ListItem>
+                            <ListItem key={ticket.idTicket}>
+                                {ticket.titleTicket}
+                            </ListItem>
                         ))}
                     </UnorderedList>
                 </div>
             )}
 
             <div>
-                {!idFilter && <TitleToDo>To Do</TitleToDo>}
+                {!idFilter && <TitleToDo>Your tickets</TitleToDo>}
 
                 <ContainerTickets edit={!idFilter}>
                     <TableTickets>
                         {!idFilter && (
                             <TitlesTable>
                                 <tr>
-                                    <th>Title</th>
+                                    <th>Tickets</th>
                                     <th>Assignee</th>
                                     <th>Priority</th>
                                     <th>Edit</th>
-                                    <th>Delete</th>
                                 </tr>
                             </TitlesTable>
                         )}
@@ -58,17 +59,66 @@ const SectionTickets = styled.section`
     gap: 2rem;
     min-height: 100vh;
     width: 90%;
+
+    @media (max-width: 700px) {
+        width: 95%;
+    }
+
+    ol,
+    ul {
+        padding-left: 2rem !important;
+
+        @media (max-width: 400px) {
+            padding-left: 1.5rem !important;
+        }
+
+        @media (max-width: 250px) {
+            padding-left: 1rem !important;
+        }
+    }
 `;
 
 const TitleTicketsList = styled.h1`
     color: ${color.textColor};
     font-size: 2.5rem;
     font-weight: bold;
+
+    @media (max-width: 1000px) {
+        font-size: 3rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 2.5rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 10vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 12vw;
+    }
 `;
 
 const SubtitleTicketsList = styled.h3`
     color: ${color.textColorGray};
     font-size: 1.2rem;
+
+    @media (max-width: 1000px) {
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 5vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 7vw;
+    }
 `;
 
 const UnorderedList = styled.ul`
@@ -110,11 +160,44 @@ const ListItem = styled.li`
     &:last-child:after {
         height: calc(100% + 5px);
     }
+
+    @media (max-width: 1000px) {
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 5vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 6vw;
+        padding: 0 0.5rem;
+    }
 `;
 
 const TitleToDo = styled.h1`
     color: ${color.textColor};
     font-size: 1.5rem;
+
+    @media (max-width: 1000px) {
+        font-size: 1.4rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1.2rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 7vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 9vw;
+    }
 `;
 
 const ContainerTickets = styled.div`
@@ -132,6 +215,7 @@ const TableTickets = styled.table`
 const TitlesTable = styled.thead`
     text-align: center;
     background: ${color.backgroundTableTitles};
+    width: 100%;
 
     tr {
         border-radius: 0.5rem;
@@ -141,6 +225,32 @@ const TitlesTable = styled.thead`
             font-size: 1.1rem;
             color: ${color.textColor};
             font-weight: 400;
+
+            @media (max-width: 700px) {
+                :nth-of-type(1) {
+                    width: 100%;
+                }
+
+                :nth-of-type(2) {
+                    display: none;
+                }
+
+                :nth-of-type(3) {
+                    display: none;
+                }
+
+                :nth-of-type(4) {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 400px) {
+                font-size: 5vw;
+            }
+
+            @media (max-width: 250px) {
+                font-size: 7vw;
+            }
         }
     }
 `;

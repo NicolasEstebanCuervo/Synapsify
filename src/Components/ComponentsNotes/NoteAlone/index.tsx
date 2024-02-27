@@ -80,9 +80,9 @@ export const NoteAlone = () => {
         <SectionNote data-testid="note-alone">
             <ContainerTexts>
                 <TitleNote>{note?.titleNote}</TitleNote>
-                <AssigneNote>
-                    {note?.assigneNote ? `${note?.assigneNote}` : "Unassigned"}
-                </AssigneNote>
+                <AssigneeNote>
+                    {note?.assigneeNote ? `${note?.assigneeNote}` : "Unassigned"}
+                </AssigneeNote>
             </ContainerTexts>
             <OptionColors>
                 <TextArea id="editor" ref={editorRef}></TextArea>
@@ -108,7 +108,7 @@ const TitleNote = styled.h1`
     text-align: left;
 `;
 
-const AssigneNote = styled.h3`
+const AssigneeNote = styled.h3`
     display: inline;
     width: auto;
     background: ${color.grayColor};

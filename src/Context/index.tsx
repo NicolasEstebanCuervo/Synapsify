@@ -32,7 +32,7 @@ export interface ITask {
 export interface INote {
     idNote: string;
     titleNote: string;
-    assigneNote?: string;
+    assigneeNote?: string;
 }
 
 export interface IContent {
@@ -121,13 +121,13 @@ export default function ContextAppComponent({
         const defaultTickets: ITicket[] = [
             {
                 idTicket: "ajsn1kasd",
-                titleTicket: "Website Unavailable: Urgent Fix Needed",
+                titleTicket: "Urgent Fix Needed",
                 assigneeTicket: "John Smith",
                 priorityTicket: "High"
             },
             {
                 idTicket: "wzxco1sd",
-                titleTicket: "Bug Report: User Profile Display Issue",
+                titleTicket: "User Profile Display Issue",
                 assigneeTicket: "Emily Brown",
                 priorityTicket: "Medium"
             }
@@ -138,12 +138,12 @@ export default function ContextAppComponent({
             {
                 idNote: "ajsn1kasd",
                 titleNote: "Urgent Fix Needed",
-                assigneNote: "John Smith",
+                assigneeNote: "John Smith",
             },
             {
                 idNote: "wzxco1sd",
                 titleNote: "User Profile Display Issue",
-                assigneNote: "Emily Brown",
+                assigneeNote: "Emily Brown",
             }
         ];
         setNotes(defaultNotes)
@@ -394,7 +394,7 @@ export default function ContextAppComponent({
         const newNote: INote = {
             titleNote: titleNote,
             idNote: uuidv4(),
-            assigneNote: assignee,
+            assigneeNote: assignee,
         };
         createNote(newNote);
         setTitleNote("");
@@ -405,7 +405,7 @@ export default function ContextAppComponent({
         setNotes((prevNotes) => {
             const updatedNotes = [note, ...prevNotes];
             localStorage.setItem("notes", JSON.stringify(updatedNotes));
-            localStorage.setItem('note', JSON.stringify(updatedNotes.map(({idNote, titleNote, assigneNote}) => ({idNote, titleNote, assigneNote}))))
+            localStorage.setItem('note', JSON.stringify(updatedNotes.map(({idNote, titleNote, assigneeNote}) => ({idNote, titleNote, assigneeNote}))))
             localStorage.setItem(note.idNote, JSON.stringify(note))
             return updatedNotes;
         });
