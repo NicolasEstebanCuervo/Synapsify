@@ -13,11 +13,15 @@ export const Note = ({
     number: number;
     assignee: string | undefined;
 }) => {
-    const { noteDelete } = useContextFnc();
+    const { noteDelete,onClickNote } = useContextFnc();
 
     const handleDelete = () => {
         noteDelete(note.idNote);
     };
+
+    const  createNote = ()=>{
+        onClickNote(note)
+    }
 
     return (
         <ContainerNote>
@@ -28,7 +32,7 @@ export const Note = ({
                     </LinkStyle>
                 </ContainerIcon>
                 <ContainerTextNote>
-                    <LinkStyle to={`/Note/${note.idNote}`}>
+                    <LinkStyle onClick={createNote} to={`/Note/${note.idNote}`}>
                         <TitleNote>{note.titleNote}</TitleNote>
                     </LinkStyle>
                     <SubtitleNote>

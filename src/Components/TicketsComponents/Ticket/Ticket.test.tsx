@@ -56,7 +56,7 @@ test("The button in the title works.", () => {
 
 test("The edit button works and are in the document.", () => {
     const mockIncrement = jest.fn();
-    jest.mock("./", () => ({ handleEditar: mockIncrement }));
+    jest.mock("./", () => ({ handleEdit: mockIncrement }));
     render(
         <ContextAppComponent>
             <BrowserRouter>

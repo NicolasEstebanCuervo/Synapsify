@@ -1,11 +1,11 @@
-import { OutputBlockData } from "@editorjs/editorjs";
+import { OutputBlockData, OutputData } from "@editorjs/editorjs";
 import {
     ChangeEvent,
-    Dispatch,
     ReactNode,
     SetStateAction,
     createContext,
     useContext,
+    useEffect,
     useState,
 } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -35,13 +35,17 @@ export interface INote {
     content?: OutputBlockData[] | any;
 }
 
+export interface IContent {
+    [key: string]: OutputData;
+}
+
 interface IContextProps {
-    // Props globales
+    // Global props.
     hiddenTickets: string[];
     toggleHiddenTicket: (ticketId: string) => void;
     newTicket: boolean;
     toggleNewTicket: () => void;
-    // Props Ticket
+    // Tickets props.
     idTicket: string;
     getIdTicket: (id: string) => void;
     ticket: ITicket | undefined;
@@ -57,8 +61,10 @@ interface IContextProps {
     ticketDelete: (id: string) => void;
     updateTicket: (id: string) => void;
     editTicket: (ticket: ITicket) => void;
-    // Props Task
+    // Task props.
     tasks: ITask[];
+    task: ITask | undefined;
+    onClickTask: (task: ITask) => void;
     handleSubmitTask: (
         title: string,
         description: string,
@@ -66,14 +72,14 @@ interface IContextProps {
     ) => void;
     updateTasks: (tasks: ITask[]) => void;
     taskDelete: (id: string) => void;
-    // Props Note
+    // Notes props.
     note: INote | undefined;
     notes: INote[];
     titleNote: string;
-    content:string;
-    setContent:Dispatch<SetStateAction<string>>;
+    content: IContent;
+    setContent: React.Dispatch<SetStateAction<OutputData>> | any;
+    onClickNote : (note: INote) => void; 
     changeTitleNote: (e: ChangeEvent<HTMLInputElement>) => void;
-    changeContent:(e: ChangeEvent<HTMLDivElement>)=>void;
     createNote: (note: INote) => void;
     noteDelete: (id: string) => void;
     handleCreateNote: (assignee: string) => void;
@@ -112,8 +118,28 @@ export default function ContextAppComponent({
     const [tickets, setTickets] = useState<ITicket[]>([]);
     const [idTicket, setIdTicket] = useState("");
 
+
+    useEffect(() => {
+        const defaultTickets: ITicket[] = [
+            {
+                idTicket: "ajsn1kasd",
+                titleTicket: "Website Unavailable: Urgent Fix Needed",
+                assigneeTicket: "John Smith",
+                priorityTicket: "High"
+            },
+            {
+                idTicket: "wzxco1sd",
+                titleTicket: "Bug Report: User Profile Display Issue",
+                assigneeTicket: "Emily Brown",
+                priorityTicket: "Medium"
+            }
+        ];
+        setTickets(defaultTickets);
+    }, []);
+
     const onClickTicket = (ticket: ITicket) => {
         setTicket(ticket);
+        localStorage.setItem("ticket", JSON.stringify(ticket));
     };
 
     const changeTitleTicket = (e: ChangeEvent<HTMLInputElement>) => {
@@ -161,7 +187,11 @@ export default function ContextAppComponent({
     };
 
     const createTicket = (ticket: ITicket) => {
-        setTickets((tickets) => [ticket, ...tickets]);
+        setTickets((tickets) => {
+            const updateTickets = [ticket, ...tickets];
+            localStorage.setItem("tickets", JSON.stringify(updateTickets));
+            return updateTickets;
+        });
     };
 
     const editTicket = (ticket: ITicket) => {
@@ -203,16 +233,67 @@ export default function ContextAppComponent({
     };
 
     const ticketDelete = (idTicket: string) => {
-        setTickets(() =>
-            tickets.filter((ticket) => ticket.idTicket !== idTicket)
+        setTickets((prevTicket) =>
+            prevTicket.filter((ticket) => ticket.idTicket !== idTicket)
         );
+        const updatedTickets = tickets.filter(
+            (ticket) => ticket.idTicket !== idTicket
+        );
+        localStorage.setItem("tickets", JSON.stringify(updatedTickets));
     };
 
-    // -----------------------------
+    useEffect(() => {
+        const storedTickets = localStorage.getItem("tickets");
+        if (storedTickets) {
+            setTickets(JSON.parse(storedTickets));
+        }
+
+        const storedTicket = localStorage.getItem("ticket");
+        if (storedTicket) {
+            setTicket(JSON.parse(storedTicket));
+        }
+    }, []);
 
     // Funtions for the Tasks
 
     const [tasks, setTasks] = useState<ITask[]>([]);
+    const [task, setTask] = useState<ITask>();
+
+
+    useEffect(() => {
+        const defaultTickets: ITask[] = [
+            {
+                idTask:"aux8ajk",
+                idTicket: "ajsn1kasd",
+                titleTask: "Investigate Root Cause",
+                descriptionTask: "Analyze server logs, error messages, and infrastructure components to identify why the website is down."
+            },
+            {
+                idTask:"aux8ajk",
+                idTicket: "ajsn1kasd",
+                titleTask: "Restore Web Services",
+                descriptionTask: "Bring the website back online by restarting services, checking configurations, and verifying connectivity."
+            },
+            {
+                idTask:"aux8ajk",
+                idTicket: "ajsn1kasd",
+                titleTask: "Notify Stakeholders",
+                descriptionTask: "Inform internal teams, stakeholders, and customers about the outage and expected resolution time."
+            },
+            {
+                idTask:"aux8ajk",
+                idTicket: "wzxco1sd",
+                titleTask: "Website Unavailable: Urgent Fix Needed",
+                descriptionTask: "High"
+            }
+        ];
+        setTasks(defaultTickets);
+    }, []);
+
+
+    const onClickTask = (task: ITask) => {
+        setTask(task);
+    };
 
     const updateTasks = (tasks: ITask[]) => {
         setTasks(tasks);
@@ -233,21 +314,44 @@ export default function ContextAppComponent({
     };
 
     const createTask = (task: ITask) => {
-        setTasks((prevTasks) => [...prevTasks, task]);
+        setTasks((prevTasks) => {
+            const updateTasks = [...prevTasks, task];
+            localStorage.setItem("tasks", JSON.stringify(updateTasks));
+            return updateTasks;
+        });
     };
 
     const taskDelete = (idTask: string) => {
-        setTasks(() => tasks.filter((task) => task.idTask !== idTask));
+        setTasks((prevTask) =>
+            prevTask.filter((taks) => taks.idTask !== idTask)
+        );
+        const updatedTasks = tasks.filter((task) => task.idTask !== idTask);
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     };
 
-    // ---------------------------
+    useEffect(() => {
+        const storedTasks = localStorage.getItem("tasks");
+        if (storedTasks) {
+            setTasks(JSON.parse(storedTasks));
+        }
+
+        const storedTask = localStorage.getItem("task");
+        if (storedTask) {
+            setTask(JSON.parse(storedTask));
+        }
+    }, []);
 
     // Function for the notes
 
     const [note, setNote] = useState<INote>();
     const [notes, setNotes] = useState<INote[]>([]);
-    const [titleNote, setTitleNote] = useState("");
-    const [content, setContent] = useState("");
+    const [titleNote, setTitleNote] = useState(""); 
+    const [content, setContent] = useState<IContent>({});
+
+    const onClickNote = (note: INote) => {
+        setNote(note);
+        localStorage.setItem("note", JSON.stringify(note));
+    };
 
     const changeTitleNote = (e: ChangeEvent<HTMLInputElement>) => {
         setTitleNote(e.target.value);
@@ -258,26 +362,42 @@ export default function ContextAppComponent({
             titleNote: titleNote,
             idNote: uuidv4(),
             assigneNote: assignee,
-            content: content, 
+            content:content
         };
         createNote(newNote);
         setTitleNote("");
         setNote(newNote);
     };
 
-    const changeContent = (e: ChangeEvent<HTMLDivElement>) => {
-        setContent(e.target.textContent || "");
-    };
-
     const createNote = (note: INote) => {
-        setNotes((notes) => [note, ...notes]);
+        setNotes((prevNotes) => {
+            const updatedNotes = [note, ...prevNotes];
+            localStorage.setItem("notes", JSON.stringify(updatedNotes));
+            return updatedNotes;
+        });
     };
+
     const noteDelete = (idNote: string) => {
-        setNotes(() => notes.filter((note) => note.idNote !== idNote));
+        setNotes((prevNotes) =>
+            prevNotes.filter((note) => note.idNote !== idNote)
+        );
+        const updatedNotes = notes.filter(
+            (ticket) => ticket.idNote !== idTicket
+        );
+        localStorage.setItem("notes", JSON.stringify(updatedNotes));
     };
 
+    useEffect(() => {
+        const storedNotes = localStorage.getItem("notes");
+        if (storedNotes) {
+            setNotes(JSON.parse(storedNotes));
+        }
 
-        console.log(note?.content)
+        const storedNote = localStorage.getItem("note");
+        if (storedNote) {
+            setNote(JSON.parse(storedNote));
+        }
+    }, []);
 
     return (
         <ContextApp.Provider
@@ -302,6 +422,8 @@ export default function ContextAppComponent({
                 editTicket,
                 ticketDelete,
                 tasks,
+                task,
+                onClickTask,
                 handleSubmitTask,
                 taskDelete,
                 updateTasks,
@@ -310,8 +432,8 @@ export default function ContextAppComponent({
                 titleNote,
                 content,
                 setContent,
+                onClickNote,
                 changeTitleNote,
-                changeContent,
                 createNote,
                 handleCreateNote,
                 noteDelete,

@@ -4,32 +4,48 @@ import { FormTasks } from "../TaskComponent/FormTasks";
 import { Tasks } from "../TaskComponent/Tasks";
 import * as color from "../../../Theme";
 import AddIcon from "../../../Assets/Icons/AddIcon";
+import { useEffect, useState } from "react";
 
 export const TicketWithTasks = ({ ticket }: { ticket: ITicket | any }) => {
+    const [loaded, setLoaded] = useState(false);
+    const [ticketData, setTicketData] = useState<ITicket | null>(null);
     const { toggleHiddenTicket, hiddenTickets } = useContextFnc();
 
-    if (!ticket) {
-        return null;
+    useEffect(() => {
+        const savedTicketJSON = localStorage.getItem("ticket");
+        if (savedTicketJSON) {
+            const savedTicket = JSON.parse(savedTicketJSON);
+            setTicketData(savedTicket);
+        }
+        setLoaded(true);
+    }, []);
+
+    if (!loaded) {
+        return <div>Loading...</div>;
     }
 
-    const isTicketHidden = hiddenTickets.includes(ticket.idTicket);
+    if (!ticketData) {
+        return <div data-testid="ticket-with-task">No ticket data found in localStorage.</div>;
+    }
+
+    const isTicketHidden = hiddenTickets.includes(ticketData.idTicket);
 
     const toggleHidden = () => {
-        toggleHiddenTicket(ticket.idTicket);
+        toggleHiddenTicket(ticketData.idTicket);
     };
 
     return (
-        <SectionTicket>
+        <SectionTicket> 
             {!isTicketHidden ? (
                 <>
                     <ContainerInfoTicket>
-                        <TitleTicket>{ticket.titleTicket}</TitleTicket>
+                        <TitleTicket>{ticketData.titleTicket}</TitleTicket>
                         <ContainerSubtitles>
                             <SubtitlesTickets>
-                                {ticket.assigneeTicket}
+                                {ticketData.assigneeTicket}
                             </SubtitlesTickets>
                             <SubtitlesTickets>
-                                {ticket.priorityTicket}
+                                {ticketData.priorityTicket}
                             </SubtitlesTickets>
                             <AddIcon onClick={toggleHidden}>+</AddIcon>
                         </ContainerSubtitles>

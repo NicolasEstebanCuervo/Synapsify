@@ -1,7 +1,7 @@
 import { useContextFnc } from "../../../Context";
 import { Note } from "../Note";
 
-export const Notes = ({ assignee }: { assignee: string }) => {
+export const Notes = () => {
     const { notes } = useContextFnc();
     return (
         <>

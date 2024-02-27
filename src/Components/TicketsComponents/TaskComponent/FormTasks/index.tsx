@@ -16,7 +16,7 @@ export const FormTasks: React.FC<FormTicketsProps> = ({
     setEdit,
     text,
 }) => {
-    const { tasks, updateTasks, toggleHiddenTicket } = useContextFnc();
+    const { tasks, updateTasks, toggleHiddenTicket} = useContextFnc();
     const { handleSubmitTask } = useContextFnc();
     const [titleTask, setTitleTask] = useState(task?.titleTask || "");
     const [descriptionTask, setDescriptionTask] = useState(
@@ -78,16 +78,16 @@ export const FormTasks: React.FC<FormTicketsProps> = ({
                 <TextFormTickets>
                     Create a task to organize yourself better
                 </TextFormTickets>
-                <Form onSubmit={handleSubmit}>
+                <Form data-testid="task-form" onSubmit={handleSubmit}>
                     <Input
                         type="text"
-                        placeholder="Title task"
+                        placeholder="Title"
                         value={titleTask}
                         onChange={handleTitleChange}
                     />
                     <Input
                         type="text"
-                        placeholder="Description task"
+                        placeholder="Description"
                         value={descriptionTask}
                         onChange={handleDescriptionChange}
                     />
@@ -99,7 +99,7 @@ export const FormTasks: React.FC<FormTicketsProps> = ({
                             (!titleTask.trim() || !descriptionTask.trim())
                         }
                     >
-                        Create a ticket
+                        Create a task
                     </Button>
                 </Form>
             </ContainerFormTickets>

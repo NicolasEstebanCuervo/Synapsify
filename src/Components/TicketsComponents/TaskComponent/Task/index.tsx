@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ITask, useContextFnc } from "../../../../Context";
 import styled from "@emotion/styled";
 import { FormTasks } from "../FormTasks";
@@ -10,17 +10,26 @@ export const Task = ({ task }: { task: ITask }) => {
     const [edit, setEdit] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
 
+    useEffect(() => {
+        const savedCheckboxValue = localStorage.getItem(`task_${task.idTask}_isChecked`);
+        if (savedCheckboxValue !== null) {
+            setIsChecked(savedCheckboxValue === 'true');
+        }
+    }, [task.idTask]);
+
     const taskDeleteFnc = () => {
         taskDelete(task.idTask);
     };
 
     const handleCheckboxChange = () => {
-        setIsChecked(!isChecked);
+        const newValue = !isChecked;
+        setIsChecked(newValue);
+        localStorage.setItem(`task_${task.idTask}_isChecked`, newValue.toString());
     };
 
-    const handleEdit = ()=>{
-        setEdit(true)
-    }
+    const handleEdit = () => {
+        setEdit(true);
+    };
 
     return (
         <SectionTask>
@@ -34,7 +43,7 @@ export const Task = ({ task }: { task: ITask }) => {
                     />
                 </>
             ) : (
-                <ContainerTask>
+                <ContainerTask data-testid="task">
                     <FirstSubContainerTask>
                         <Input
                             type="checkbox"
@@ -42,19 +51,14 @@ export const Task = ({ task }: { task: ITask }) => {
                             onChange={handleCheckboxChange}
                         />
                         <ContainerTextsTask>
-                            <TitleTask> {task.titleTask}</TitleTask>
-                            <DescriptionTask>
-
-                                {task.descriptionTask}
-                            </DescriptionTask>
+                            <TitleTask>{task.titleTask}</TitleTask>
+                            <DescriptionTask>{task.descriptionTask}</DescriptionTask>
                         </ContainerTextsTask>
                     </FirstSubContainerTask>
                     <SecondSubContainerTask>
                         <Button onClick={handleEdit}>Edit</Button>
                         <Button>
-                            <ExitIcon onClick={taskDeleteFnc}>
-                                Borrar la tarea
-                            </ExitIcon>
+                            <ExitIcon onClick={taskDeleteFnc}>Borrar la tarea</ExitIcon>
                         </Button>
                     </SecondSubContainerTask>
                 </ContainerTask>
@@ -81,10 +85,14 @@ const FirstSubContainerTask = styled.div`
 `;
 
 const Input = styled.input`
-    width: 18px;
+    width: 1.1rem;
 `;
 
-const ContainerTextsTask = styled.div``;
+const ContainerTextsTask = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+`;
 
 const TitleTask = styled.h1`
     color: ${color.textColor};
@@ -100,6 +108,7 @@ const DescriptionTask = styled.h3`
 
 const SecondSubContainerTask = styled.div`
     display: flex;
+    gap: 1rem;
 `;
 
 const Button = styled.button`

@@ -81,6 +81,7 @@ const ListItem = styled.li`
     padding-left: 1rem;
     list-style-type: none;
     color: ${color.textColor};
+    margin: 1rem 0;
 
     &:before {
         content: "";

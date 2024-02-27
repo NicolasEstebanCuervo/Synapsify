@@ -50,13 +50,10 @@ export const FormNote = () => {
                         ))}
                     </Select>
 
-                    {note && (
                         <ContainerNotes>
                             <TextNote>Recent notes</TextNote>
-
-                            <Notes assignee={assignee} />
+                            <Notes />
                         </ContainerNotes>
-                    )}
 
                     <Button type="submit">Create a note</Button>
                 </Form>

@@ -15,6 +15,19 @@ test("The form and the form text are in the document.", () => {
     expect(textForm).toBeInTheDocument;
 });
 
+test("The title input works.", () => {
+    render(
+        <ContextAppComponent>
+            <FormTickets text="Create a Ticket" />
+        </ContextAppComponent>
+    );
+    const titleInput = screen.getByPlaceholderText("Title");
+    fireEvent.change(titleInput, { target: { value: "Study GitHub" } });
+
+    const newInput = screen.getByDisplayValue("Study GitHub");
+
+    expect(newInput).toBeInTheDocument;
+});
 
 test("The assignee input works.", () => {
     render(

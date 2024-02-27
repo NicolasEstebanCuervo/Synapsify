@@ -5,7 +5,7 @@ import { Tickets } from ".";
 test("The tickets are in the document.", () => {
     render(
         <ContextAppComponent>
-            <Tickets />
+            <Tickets idFilter="null"/>
         </ContextAppComponent>
     );
     const tickets = screen.getByTestId("tickets");

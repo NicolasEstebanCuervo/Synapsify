@@ -84,7 +84,7 @@ const TableRow = styled.tr`
 
 const TableCell = styled.td`
     font-size: 1rem;
-    padding: 10px 0;
+    padding: 1rem 0;
     color: ${color.textColorGray};
     text-transform: capitalize;
 

@@ -10,7 +10,7 @@ export const TicketPage = () => {
     return (
         <Container>
             <NavBar />
-            <TicketWithTasks ticket={ticket} />
+            <TicketWithTasks  ticket={ticket} />
         </Container>
     );
 };
