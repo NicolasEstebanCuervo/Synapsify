@@ -24,9 +24,9 @@ test("The title input works.", () => {
         </ContextAppComponent>
     );
     const titleInput = screen.getByPlaceholderText("Title");
-    fireEvent.change(titleInput, { target: { value: "Create a notes for my study" } });
+    fireEvent.change(titleInput, { target: { value: "Study github." } });
 
-    const newInput = screen.getByDisplayValue("Create a notes for my study");
+    const newInput = screen.getByDisplayValue("Study github.");
 
     expect(newInput).toBeInTheDocument;
 });

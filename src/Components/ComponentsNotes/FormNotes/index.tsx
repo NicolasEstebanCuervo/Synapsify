@@ -3,10 +3,9 @@ import { useContextFnc } from "../../../Context";
 import { Notes } from "../Notes";
 import styled from "@emotion/styled";
 import * as color from "../../../Theme";
-import { BlockMutationEvent } from "@editorjs/editorjs";
 
 export const FormNote = () => {
-    const { titleNote, changeTitleNote, handleCreateNote, tickets, note } = useContextFnc();
+    const { titleNote, changeTitleNote, handleCreateNote, tickets, notes } = useContextFnc();
 
     const [assignee, setAssignee] = useState("");
 
@@ -33,7 +32,7 @@ export const FormNote = () => {
         <SectionFormTickets>
             <ContainerFormTickets>
                 <TitleFormTickets>Create a note</TitleFormTickets>
-                <Form action="" onSubmit={handleSubmit}>
+                <Form action="" data-testid="note-form" onSubmit={handleSubmit}>
                     <Input
                         type="text"
                         onChange={onChangeTitle}
@@ -52,10 +51,10 @@ export const FormNote = () => {
 
                         <ContainerNotes>
                             <TextNote>Recent notes</TextNote>
-                            <Notes />
+                                <Notes />
                         </ContainerNotes>
 
-                    <Button type="submit">Create a note</Button>
+                    <Button type="submit" data-testid="button-form-notes">Create a note</Button>
                 </Form>
             </ContainerFormTickets>
         </SectionFormTickets>

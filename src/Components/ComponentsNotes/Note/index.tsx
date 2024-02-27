@@ -24,7 +24,7 @@ export const Note = ({
     }
 
     return (
-        <ContainerNote>
+        <ContainerNote data-testid="note">
             <ContainerIconAndTexts>
                 <ContainerIcon>
                     <LinkStyle to={`/Note/${note.idNote}`}>
@@ -32,7 +32,7 @@ export const Note = ({
                     </LinkStyle>
                 </ContainerIcon>
                 <ContainerTextNote>
-                    <LinkStyle onClick={createNote} to={`/Note/${note.idNote}`}>
+                    <LinkStyle data-testid="title-note" onClick={createNote} to={`/Note/${note.idNote}`}>
                         <TitleNote>{note.titleNote}</TitleNote>
                     </LinkStyle>
                     <SubtitleNote>

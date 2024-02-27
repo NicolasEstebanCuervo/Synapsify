@@ -1,4 +1,5 @@
 import { OutputBlockData, OutputData } from "@editorjs/editorjs";
+import { Blocks } from "@editorjs/editorjs/types/api";
 import {
     ChangeEvent,
     ReactNode,
@@ -32,7 +33,6 @@ export interface INote {
     idNote: string;
     titleNote: string;
     assigneNote?: string;
-    content?: OutputBlockData[] | any;
 }
 
 export interface IContent {
@@ -76,8 +76,6 @@ interface IContextProps {
     note: INote | undefined;
     notes: INote[];
     titleNote: string;
-    content: IContent;
-    setContent: React.Dispatch<SetStateAction<OutputData>> | any;
     onClickNote : (note: INote) => void; 
     changeTitleNote: (e: ChangeEvent<HTMLInputElement>) => void;
     createNote: (note: INote) => void;
@@ -135,7 +133,21 @@ export default function ContextAppComponent({
             }
         ];
         setTickets(defaultTickets);
-    }, []);
+
+        const defaultNotes: INote[] = [
+            {
+                idNote: "ajsn1kasd",
+                titleNote: "Urgent Fix Needed",
+                assigneNote: "John Smith",
+            },
+            {
+                idNote: "wzxco1sd",
+                titleNote: "User Profile Display Issue",
+                assigneNote: "Emily Brown",
+            }
+        ];
+        setNotes(defaultNotes)
+    },[]);
 
     const onClickTicket = (ticket: ITicket) => {
         setTicket(ticket);
@@ -259,9 +271,8 @@ export default function ContextAppComponent({
     const [tasks, setTasks] = useState<ITask[]>([]);
     const [task, setTask] = useState<ITask>();
 
-
     useEffect(() => {
-        const defaultTickets: ITask[] = [
+        const defaultTask: ITask[] = [
             {
                 idTask:"aux8ajk",
                 idTicket: "ajsn1kasd",
@@ -281,13 +292,36 @@ export default function ContextAppComponent({
                 descriptionTask: "Inform internal teams, stakeholders, and customers about the outage and expected resolution time."
             },
             {
-                idTask:"aux8ajk",
+                idTask:"wzxco1sd",
                 idTicket: "wzxco1sd",
                 titleTask: "Website Unavailable: Urgent Fix Needed",
                 descriptionTask: "High"
+            },            {
+                idTask:"wzxco1sd",
+                idTicket: "wzxco1sd",
+                titleTask: "User Profile Display Issue",
+                descriptionTask: "User profiles are not rendering correctly on the homepage."
+            },
+            {
+                idTask:"wzxco1sd",
+                idTicket: "wzxco1sd",
+                titleTask: "Image Loading Error",
+                descriptionTask: "Profile images fail to load properly."
+            },
+            {
+                idTask:"wzxco1sd",
+                idTicket: "wzxco1sd",
+                titleTask: "Non-Functional Edit Button",
+                descriptionTask: "The edit button in the user profile does not perform any action."
+            },
+            {
+                idTask:"wzxco1sd",
+                idTicket: "wzxco1sd",
+                titleTask: "Missing Contact Information",
+                descriptionTask: "Contact information (email and phone number) is absent from the user profile."
             }
         ];
-        setTasks(defaultTickets);
+        setTasks(defaultTask);
     }, []);
 
 
@@ -346,7 +380,6 @@ export default function ContextAppComponent({
     const [note, setNote] = useState<INote>();
     const [notes, setNotes] = useState<INote[]>([]);
     const [titleNote, setTitleNote] = useState(""); 
-    const [content, setContent] = useState<IContent>({});
 
     const onClickNote = (note: INote) => {
         setNote(note);
@@ -362,7 +395,6 @@ export default function ContextAppComponent({
             titleNote: titleNote,
             idNote: uuidv4(),
             assigneNote: assignee,
-            content:content
         };
         createNote(newNote);
         setTitleNote("");
@@ -373,6 +405,8 @@ export default function ContextAppComponent({
         setNotes((prevNotes) => {
             const updatedNotes = [note, ...prevNotes];
             localStorage.setItem("notes", JSON.stringify(updatedNotes));
+            localStorage.setItem('note', JSON.stringify(updatedNotes.map(({idNote, titleNote, assigneNote}) => ({idNote, titleNote, assigneNote}))))
+            localStorage.setItem(note.idNote, JSON.stringify(note))
             return updatedNotes;
         });
     };
@@ -430,8 +464,6 @@ export default function ContextAppComponent({
                 note,
                 notes,
                 titleNote,
-                content,
-                setContent,
                 onClickNote,
                 changeTitleNote,
                 createNote,

@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const ticketTest: ITicket = {
     idTicket: "testTicket",
-    titleTicket: "Ticket test",
+    titleTicket: "Test ticket",
     assigneeTicket: "Nicolas Rojas",
     priorityTicket: "Low",
 };
@@ -30,7 +30,7 @@ test("The ticket texts are in the document.", () => {
             </BrowserRouter>
         </ContextAppComponent>
     );
-    const titleTicket = screen.getByText("Ticket test");
+    const titleTicket = screen.getByText("Test ticket");
     expect(titleTicket).toBeInTheDocument;
     const assigneeTicket = screen.getByText("Nicolas Rojas");
     expect(assigneeTicket).toBeInTheDocument;
@@ -48,7 +48,7 @@ test("The button in the title works.", () => {
             </BrowserRouter>
         </ContextAppComponent>
     );
-    const titleButton = screen.getByText("Ticket test");
+    const titleButton = screen.getByText("Test ticket");
     fireEvent.click(titleButton);
     expect(titleButton).toBeInTheDocument;
     expect(titleButton).toHaveBeenCalled;
