@@ -121,7 +121,7 @@ const TitleTicket = styled.h1`
     }
 
     @media (max-width: 250px) {
-        font-size: 15vw;
+        font-size: 12vw;
     }
 `;
 
@@ -169,6 +169,6 @@ const SubtitlesTickets = styled.h3`
     }
 
     @media (max-width: 250px) {
-        font-size: 7vw;
+        font-size: 6vw;
     }
 `;

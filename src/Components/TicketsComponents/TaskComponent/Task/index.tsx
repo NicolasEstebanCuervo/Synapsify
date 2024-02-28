@@ -122,7 +122,7 @@ const TitleTask = styled.h1`
     color: ${color.textColor};
     font-size: 1.3rem;
     margin: 0;
-    text-align:center;
+    text-align:left;
 
     @media (max-width: 1000px) {
         font-size: 1.2rem;
@@ -141,7 +141,7 @@ const TitleTask = styled.h1`
     }
 
     @media (max-width: 250px) {
-        font-size: 8vw;
+        font-size: 7vw;
     }
 `;
 
@@ -149,6 +149,7 @@ const DescriptionTask = styled.h3`
     color: ${color.textColorGray};
     font-size: 1.2rem;
     margin: 0;
+    text-align:left;
 
     @media (max-width: 1000px) {
         font-size: 1.1rem;
@@ -167,7 +168,7 @@ const DescriptionTask = styled.h3`
     }
 
     @media (max-width: 250px) {
-        font-size: 6vw;
+        font-size: 5.5vw;
     }
 `;
 
