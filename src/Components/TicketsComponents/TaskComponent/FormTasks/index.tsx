@@ -117,6 +117,18 @@ const SectionFormTickets = styled.main`
 
 const ContainerFormTickets = styled.div`
     width: 40%;
+
+    @media (max-width: 1000px) {
+        width: 60%;
+    }
+
+    @media (max-width: 700px) {
+        width: 80%;
+    }
+
+    @media (max-width: 300px) {
+        width: 90%;
+    }
 `;
 
 const TitleFormTickets = styled.h1`
@@ -124,12 +136,46 @@ const TitleFormTickets = styled.h1`
     font-size: 3.5rem;
     font-weight: bold;
     text-align: left;
+
+    @media (max-width: 1000px) {
+        font-size: 3rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 2.5rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 10vw;
+        text-align: center;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 12vw;
+    }
 `;
 
 const TextFormTickets = styled.h1`
     color: ${color.textColorGray};
     font-size: 1.2rem;
     text-align: left;
+
+    @media (max-width: 1000px) {
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 5vw;
+        text-align: center;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 7vw;
+    }
 `;
 
 const Form = styled.form`
@@ -137,6 +183,22 @@ const Form = styled.form`
     flex-direction: column;
     gap: 1rem;
     margin-top: 4rem;
+
+    @media (max-width: 1000px) {
+        margin-top: 3.5rem;
+    }
+
+    @media (max-width: 700px) {
+        margin-top: 3rem;
+    }
+
+    @media (max-width: 400px) {
+        margin-top: 2.5rem;
+    }
+
+    @media (max-width: 250px) {
+        margin-top: 2rem;
+    }
 `;
 const Input = styled.input`
     padding: 0.7rem 0.5rem;
@@ -146,6 +208,24 @@ const Input = styled.input`
     outline: 1px solid ${color.borderInputColor};
     color: ${color.textColor};
     font-size: 1.2rem;
+    border: none;
+
+    @media (max-width: 1000px) {
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        padding: 0.4rem 0.5rem;
+        font-size: 5vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 7vw;
+    }
 `;
 
 const Button = styled.button`
@@ -155,4 +235,17 @@ const Button = styled.button`
     padding: 0.7rem 0;
     background: ${color.tertiaryColor};
     color: ${color.textColor};
+
+    @media (max-width: 1000px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        padding: 0.4rem 0;
+        font-size: 5vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 6vw;
+    }
 `;
