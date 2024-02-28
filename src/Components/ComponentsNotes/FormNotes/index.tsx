@@ -38,6 +38,7 @@ export const FormNote = () => {
                         onChange={onChangeTitle}
                         value={titleNote}
                         placeholder="Title"
+                        maxLength={20}
                     />
 
                     <Select value={assignee} onChange={onChangeAssigne}>
@@ -65,10 +66,30 @@ const SectionFormTickets = styled.main`
     width: 80%;
     display: flex;
     justify-content: center;
+
+    @media (max-width: 1000px) {
+        width: 60%;
+    }
+
+    @media (max-width: 700px) {
+        width: 90%;
+    }
+
+    @media (max-width: 300px) {
+        width: 95%;
+    }
 `;
 
 const ContainerFormTickets = styled.div`
-    width: 40%;
+    width: 60%;
+
+    @media (max-width: 1000px) {
+        width: 90%;
+    }
+
+    @media (max-width: 300px) {
+        width: 100%;
+    }
 `;
 
 const TitleFormTickets = styled.h1`
@@ -76,6 +97,15 @@ const TitleFormTickets = styled.h1`
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
+
+    @media (max-width: 400px) {
+        font-size: 10vw;
+        text-align: center;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 12vw;
+    }
 `;
 
 const Form = styled.form`
@@ -93,6 +123,23 @@ const Input = styled.input`
     outline: 1px solid ${color.borderInputColor};
     color: ${color.textColor};
     font-size: 1.2rem;
+
+    @media (max-width: 1000px) {
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        padding: 0.4rem 0.5rem;
+        font-size: 5vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 7vw;
+    }
 `;
 
 const Select = styled.select`
@@ -100,6 +147,23 @@ const Select = styled.select`
     color: ${color.textColor};
     border-radius: 0.5rem;
     padding: 0.5rem;
+
+    @media (max-width: 1000px) {
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        padding: 0.4rem 0.5rem;
+        font-size: 5vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 7vw;
+    }
 `;
 
 const TextNote = styled.h1`
@@ -107,6 +171,22 @@ const TextNote = styled.h1`
     font-size: 1.5rem;
     font-weight: bold;
     text-align: left;
+
+    @media (max-width: 1000px) {
+        font-size: 1.4rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1.3rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 9vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 12vw;
+    }
 `;
 
 const ContainerNotes = styled.div`
@@ -122,4 +202,17 @@ const Button = styled.button`
     padding: 0.7rem 0;
     background: ${color.tertiaryColor};
     color: ${color.textColor};
+
+    @media (max-width: 1000px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        padding: 0.4rem 0;
+        font-size: 5vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 6vw;
+    }
 `;

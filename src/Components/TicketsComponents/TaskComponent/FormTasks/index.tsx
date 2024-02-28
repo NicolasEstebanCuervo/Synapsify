@@ -84,12 +84,14 @@ export const FormTasks: React.FC<FormTicketsProps> = ({
                         placeholder="Title"
                         value={titleTask}
                         onChange={handleTitleChange}
+                        maxLength={30}
                     />
                     <Input
                         type="text"
                         placeholder="Description"
                         value={descriptionTask}
                         onChange={handleDescriptionChange}
+                        maxLength={50}
                     />
 
                     <Button
@@ -116,10 +118,10 @@ const SectionFormTickets = styled.main`
 `;
 
 const ContainerFormTickets = styled.div`
-    width: 40%;
+    width: 60%;
 
     @media (max-width: 1000px) {
-        width: 60%;
+        width: 75%;
     }
 
     @media (max-width: 700px) {

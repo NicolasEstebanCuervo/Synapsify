@@ -51,28 +51,32 @@ const ContainerNote = styled.div`
     gap: 1rem;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 400px) {
+        flex-direction: column;
+        align-items: start;
+    }
 `;
 
 const ContainerIconAndTexts = styled.div`
     display: flex;
+    align-items: center;
     gap: 1rem;
+
+    @media (max-width: 400px) {
+        gap: 0.5rem;
+    }
+
+`;
+const ContainerTextNote = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 const ContainerIcon = styled.div`
     background: ${color.grayColor};
     padding: 0.5rem;
     border-radius: 0.5rem;
-`;
-
-const ContainerTextNote = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-const TitleNote = styled.h1`
-    color: ${color.textColor};
-    font-size: 1.3rem;
-    margin: 0;
 `;
 
 const LinkStyle = styled(Link)`
@@ -88,10 +92,56 @@ const LinkStyle = styled(Link)`
     }
 `;
 
+const TitleNote = styled.h1`
+    color: ${color.textColor};
+    font-size: 1.3rem;
+    margin: 0;
+
+    @media (max-width: 1000px) {
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 6vw;
+    }
+
+    @media (max-width: 300px) {
+        font-size: 7vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 10vw;
+    }
+`;
+
 const SubtitleNote = styled.h3`
     color: ${color.textColorGray};
     font-size: 0.9rem;
     margin: 0;
+
+    @media (max-width: 1000px) {
+        font-size: 0.8rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 5vw;
+    }
+
+    @media (max-width: 300px) {
+        font-size: 6vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 7vw;
+    }
 `;
 
 const Button = styled.button`
@@ -102,4 +152,22 @@ const Button = styled.button`
     padding: 0.3rem 1.3rem;
     background: ${color.grayColor};
     color: ${color.textColor};
+
+    @media (max-width: 1000px) {
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+        padding: 0.2rem 0.9rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 5vw;
+        text-align: center;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 7vw;
+    }
 `;

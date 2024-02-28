@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { FormTasks } from "../FormTasks";
 import ExitIcon from "../../../../Assets/Icons/ExitIcon";
 import * as color from "../../../../Theme";
+import EditIcon from "../../../../Assets/Icons/EditIcon";
 
 export const Task = ({ task }: { task: ITask }) => {
     const { taskDelete } = useContextFnc();
@@ -11,9 +12,11 @@ export const Task = ({ task }: { task: ITask }) => {
     const [isChecked, setIsChecked] = useState(false);
 
     useEffect(() => {
-        const savedCheckboxValue = localStorage.getItem(`task_${task.idTask}_isChecked`);
+        const savedCheckboxValue = localStorage.getItem(
+            `task_${task.idTask}_isChecked`
+        );
         if (savedCheckboxValue !== null) {
-            setIsChecked(savedCheckboxValue === 'true');
+            setIsChecked(savedCheckboxValue === "true");
         }
     }, [task.idTask]);
 
@@ -24,7 +27,10 @@ export const Task = ({ task }: { task: ITask }) => {
     const handleCheckboxChange = () => {
         const newValue = !isChecked;
         setIsChecked(newValue);
-        localStorage.setItem(`task_${task.idTask}_isChecked`, newValue.toString());
+        localStorage.setItem(
+            `task_${task.idTask}_isChecked`,
+            newValue.toString()
+        );
     };
 
     const handleEdit = () => {
@@ -52,13 +58,21 @@ export const Task = ({ task }: { task: ITask }) => {
                         />
                         <ContainerTextsTask>
                             <TitleTask>{task.titleTask}</TitleTask>
-                            <DescriptionTask>{task.descriptionTask}</DescriptionTask>
+                            <DescriptionTask>
+                                {task.descriptionTask}
+                            </DescriptionTask>
                         </ContainerTextsTask>
                     </FirstSubContainerTask>
                     <SecondSubContainerTask>
-                        <Button onClick={handleEdit}>Edit</Button>
                         <Button>
-                            <ExitIcon onClick={taskDeleteFnc}>Borrar la tarea</ExitIcon>
+                            <EditIcon onClick={handleEdit}>
+                                Borrar la tarea
+                            </EditIcon>
+                        </Button>
+                        <Button>
+                            <ExitIcon onClick={taskDeleteFnc}>
+                                Borrar la tarea
+                            </ExitIcon>
                         </Button>
                     </SecondSubContainerTask>
                 </ContainerTask>
@@ -71,6 +85,10 @@ const SectionTask = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 400px) {
+        position: relative;
+    }
 `;
 
 const ContainerTask = styled.div`
@@ -82,6 +100,10 @@ const ContainerTask = styled.div`
 const FirstSubContainerTask = styled.div`
     display: flex;
     gap: 1rem;
+
+    @media (max-width: 700px) {
+        gap: 0.5rem;
+    }
 `;
 
 const Input = styled.input`
@@ -92,29 +114,76 @@ const ContainerTextsTask = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+
+
 `;
 
 const TitleTask = styled.h1`
     color: ${color.textColor};
     font-size: 1.2rem;
     margin: 0;
+
+    @media (max-width: 1000px) {
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 5vw;
+    }
+
+    @media (max-width: 300px) {
+        font-size: 6vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 8vw;
+    }
 `;
 
 const DescriptionTask = styled.h3`
     color: ${color.textColorGray};
     font-size: 1rem;
     margin: 0;
+
+    @media (max-width: 1000px) {
+        font-size: 0.8rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 4vw;
+    }
+
+    @media (max-width: 300px) {
+        font-size: 5vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 6vw;
+    }
 `;
 
 const SecondSubContainerTask = styled.div`
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
+
+    @media (max-width: 400px) {
+        gap: 0;
+        flex-direction: column;
+    }
 `;
 
 const Button = styled.button`
     background: none;
     border: none;
     color: ${color.textColor};
-    font-weight: 500;
-    font-size: 1rem;
 `;

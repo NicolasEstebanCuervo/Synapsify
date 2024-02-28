@@ -126,7 +126,6 @@ const TableCell = styled.td`
 
     :nth-of-type(3) {
         color: ${color.textColor};
-        font-size: 0.9rem;
     }
 
     @media (max-width: 1000px) {
