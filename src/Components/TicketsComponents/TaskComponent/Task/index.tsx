@@ -113,7 +113,6 @@ const Input = styled.input`
 const ContainerTextsTask = styled.div`
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
     gap: 0.2rem;
 `;
@@ -122,7 +121,6 @@ const TitleTask = styled.h1`
     color: ${color.textColor};
     font-size: 1.3rem;
     margin: 0;
-    text-align:left;
 
     @media (max-width: 1000px) {
         font-size: 1.2rem;
@@ -149,7 +147,6 @@ const DescriptionTask = styled.h3`
     color: ${color.textColorGray};
     font-size: 1.2rem;
     margin: 0;
-    text-align:left;
 
     @media (max-width: 1000px) {
         font-size: 1.1rem;
