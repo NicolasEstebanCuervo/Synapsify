@@ -112,23 +112,23 @@ const Input = styled.input`
 
 const ContainerTextsTask = styled.div`
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     gap: 0.2rem;
-
-
 `;
 
 const TitleTask = styled.h1`
     color: ${color.textColor};
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin: 0;
 
     @media (max-width: 1000px) {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
     }
 
     @media (max-width: 700px) {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     @media (max-width: 400px) {
@@ -146,15 +146,15 @@ const TitleTask = styled.h1`
 
 const DescriptionTask = styled.h3`
     color: ${color.textColorGray};
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 0;
 
     @media (max-width: 1000px) {
-        font-size: 0.8rem;
+        font-size: 1.1rem;
     }
 
     @media (max-width: 700px) {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     @media (max-width: 400px) {
@@ -176,8 +176,11 @@ const SecondSubContainerTask = styled.div`
     align-items: center;
     gap: 1rem;
 
-    @media (max-width: 400px) {
+    @media (max-width: 700px) {
         gap: 0;
+    }
+
+    @media (max-width: 400px) {
         flex-direction: column;
     }
 `;
