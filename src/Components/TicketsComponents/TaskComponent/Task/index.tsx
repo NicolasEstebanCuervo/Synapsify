@@ -122,6 +122,7 @@ const TitleTask = styled.h1`
     color: ${color.textColor};
     font-size: 1.3rem;
     margin: 0;
+    text-align:center;
 
     @media (max-width: 1000px) {
         font-size: 1.2rem;
