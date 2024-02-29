@@ -10,8 +10,8 @@ export const Tasks = ({ ticketId }: { ticketId: string }) => {
     return (
         <ContainerTasks data-testid="tasks">
             {filteredTasks.map((task) => (
-                <ContainerTask>
-                <Task task={task} key={task.idTask} />
+                <ContainerTask key={task.idTask}> 
+                <Task task={task}  />
                 </ContainerTask>
             ))}
         </ContainerTasks>

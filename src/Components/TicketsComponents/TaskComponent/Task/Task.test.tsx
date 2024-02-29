@@ -46,7 +46,7 @@ test("The edit button works and are in the document.", () => {
             </BrowserRouter>
         </ContextAppComponent>
     );
-    const editButton = screen.getByText("Edit");
+    const editButton = screen.getByTestId("edit-icon");
     fireEvent.click(editButton);
     expect(editButton).toBeInTheDocument;
     expect(editButton).toHaveBeenCalled;

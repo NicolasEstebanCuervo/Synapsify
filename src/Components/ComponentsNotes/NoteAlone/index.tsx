@@ -57,23 +57,31 @@ export const NoteAlone = () => {
             }
         };
     }, []);
-    useEffect(() => {
-        if (editorInstance.current && content) {
-            editorInstance.current.isReady
-                .then(() => {
-                    return editorInstance.current?.render(content);
-                })
-                .catch((error) => {
-                    return console.error(error);
-                });
-        }
-    }, [content]);
+        useEffect(() => {
+            if (editorInstance.current && content) {
+                editorInstance.current.isReady
+                    .then(() => {
+                        editorInstance.current?.render(content) 
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            }
+        }, [content]);
 
     useEffect(() => {
+
+
         const storedData = JSON.parse(
             window.localStorage.getItem("note") || "{}"
         );
-        setContent(storedData);
+
+        if(storedData){
+            setContent(storedData);
+        }else{
+            setContent("")
+        }
+
     }, [id]);
 
     return (
@@ -81,7 +89,9 @@ export const NoteAlone = () => {
             <ContainerTexts>
                 <TitleNote>{note?.titleNote}</TitleNote>
                 <AssigneeNote>
-                    {note?.assigneeNote ? `${note?.assigneeNote}` : "Unassigned"}
+                    {note?.assigneeNote
+                        ? `${note?.assigneeNote}`
+                        : "Unassigned"}
                 </AssigneeNote>
             </ContainerTexts>
             <OptionColors>

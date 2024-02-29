@@ -65,14 +65,10 @@ export const Task = ({ task }: { task: ITask }) => {
                     </FirstSubContainerTask>
                     <SecondSubContainerTask>
                         <Button>
-                            <EditIcon onClick={handleEdit}>
-                                Borrar la tarea
-                            </EditIcon>
+                            <EditIcon onClick={handleEdit}></EditIcon>
                         </Button>
                         <Button>
-                            <ExitIcon onClick={taskDeleteFnc}>
-                                Borrar la tarea
-                            </ExitIcon>
+                            <ExitIcon onClick={taskDeleteFnc}></ExitIcon>
                         </Button>
                     </SecondSubContainerTask>
                 </ContainerTask>

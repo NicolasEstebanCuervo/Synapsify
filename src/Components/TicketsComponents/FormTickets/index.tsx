@@ -89,7 +89,7 @@ export const FormTickets: React.FC<FormTicketsProps> = ({
                     />
                     <Button type="submit">Create a ticket</Button>
                     {tickets.length > 0 && (
-                        <Button onClick={()=>(toggleNewTicketFnc)}>Return to menu</Button>
+                        <Button onClick={()=>(toggleNewTicketFnc)}>Return to tickets</Button>
                     )}
                 </Form>
             </ContainerFormTickets>

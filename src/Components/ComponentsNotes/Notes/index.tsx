@@ -7,13 +7,12 @@ export const Notes = () => {
     return (
         <ContainerNotes data-testid="notes">
             {notes.map((note, index) => (
-                <ContainerNote>
-                <Note
-                    assignee={note.assigneeNote}
-                    note={note}
-                    number={index + 1}
-                    key={note.idNote}
-                />
+                <ContainerNote key={index}>
+                    <Note
+                        assignee={note.assigneeNote}
+                        note={note}
+                        number={index + 1}
+                    />
                 </ContainerNote>
             ))}
         </ContainerNotes>
@@ -39,4 +38,4 @@ const ContainerNotes = styled.div`
 
 const ContainerNote = styled.div`
     width: 100%;
-`
+`;

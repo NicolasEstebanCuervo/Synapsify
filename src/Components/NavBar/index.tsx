@@ -7,7 +7,6 @@ import * as color from "../../Theme"
 
 export const NavBar = () => {
     const { toggleNewTicket } = useContextFnc();
-    const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleNewTicketFnc = () => {
@@ -30,14 +29,11 @@ export const NavBar = () => {
                     className={`${isOpen ? "show" : ""}`}
                 >
                     <LinksContainer className="mr-auto">
-                        {location.pathname === "/" ? (
-                            <NavLink onClick={toggleNewTicketFnc}>New ticket</NavLink>
-                        ) : (
-                            <NavLink as={Link} to="/" onClick={toggleNewTicketFnc}>
+                        <NavLink as={Link} to="/">Home</NavLink>
+                            <NavLink as={Link} to="/Tickets" onClick={toggleNewTicketFnc}>
                                 New ticket
                             </NavLink>
-                        )}
-                        <NavLink as={Link} to="/">Tickets</NavLink>
+                        <NavLink as={Link} to="/Tickets">Tickets</NavLink>
                         <NavLink as={Link} to="/Notes/">Create a note</NavLink>
                     </LinksContainer>
                 </Navbar.Collapse>

@@ -23,7 +23,7 @@ const Container = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 1.2rem;
     min-width: 80%;
     min-height: 100vh;
     background: ${color.primaryColor};
