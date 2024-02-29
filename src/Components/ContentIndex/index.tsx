@@ -100,6 +100,7 @@ const MainContent = styled.main`
     align-items: center;
     flex-direction: column;
     gap: 2rem;
+    padding-bottom: 5rem;
 `;
 
 const ContainerTitles = styled.div`
@@ -227,7 +228,7 @@ const TitleContent = styled.h1`
 `;
 
 const DescriptionContent = styled.p`
-    color: ${color.textColor};
+    color: ${color.textColorGray};
     font-size: 1rem;
 
     @media (max-width: 1000px) {
