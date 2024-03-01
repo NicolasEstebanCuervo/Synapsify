@@ -53,7 +53,7 @@ export const TicketWithTasks = ({ ticket }: { ticket: ITicket | any }) => {
                                     {ticketData.priorityTicket}
                                 </SubtitlesTickets>
                             </SubContainerSubtitles>
-                            <AddIcon onClick={toggleHidden}>+</AddIcon>
+                            <AddIcon data-testid="add-icon-cypress" onClick={toggleHidden}>+</AddIcon>
                         </ContainerSubtitles>
                     </ContainerInfoTicket>
 

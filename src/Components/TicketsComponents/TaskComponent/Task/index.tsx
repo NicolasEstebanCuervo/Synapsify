@@ -55,6 +55,7 @@ export const Task = ({ task }: { task: ITask }) => {
                             type="checkbox"
                             checked={isChecked}
                             onChange={handleCheckboxChange}
+                            data-testid="check-box-cypress"
                         />
                         <ContainerTextsTask>
                             <TitleTask>{task.titleTask}</TitleTask>
@@ -65,10 +66,10 @@ export const Task = ({ task }: { task: ITask }) => {
                     </FirstSubContainerTask>
                     <SecondSubContainerTask>
                         <Button>
-                            <EditIcon onClick={handleEdit}></EditIcon>
+                            <EditIcon data-testid="edit-icon-cypress" onClick={handleEdit}></EditIcon>
                         </Button>
                         <Button>
-                            <ExitIcon onClick={taskDeleteFnc}></ExitIcon>
+                            <ExitIcon data-testid="exit-icon-cypress" onClick={taskDeleteFnc}></ExitIcon>
                         </Button>
                     </SecondSubContainerTask>
                 </ContainerTask>

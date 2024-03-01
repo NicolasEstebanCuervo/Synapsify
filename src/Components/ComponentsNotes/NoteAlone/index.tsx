@@ -58,7 +58,7 @@ export const NoteAlone = () => {
         };
     }, []);
         useEffect(() => {
-            if (editorInstance.current && content) {
+            if (editorInstance.current && content && content.blocks) {
                 editorInstance.current.isReady
                     .then(() => {
                         editorInstance.current?.render(content) 

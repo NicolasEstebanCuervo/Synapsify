@@ -82,7 +82,7 @@ export const ContentIndex = () => {
                         team collaboration and communication.
                     </DescriptionContent>
                     <Link to="Notes">
-                        <Button>Make It Happen!</Button>
+                        <Button>Write Your Story!</Button>
                     </Link>
                 </ContainerTexsContent>
                 <Illustration
@@ -202,7 +202,7 @@ const ContainerTexsContent = styled.div`
     }
 
     @media (max-width: 250px) {
-        width: 95%;
+        width: 100%;
     }
 `;
 
