@@ -159,6 +159,14 @@ const OptionColors = styled.div`
     }
     min-width: 100%;
     min-height: 100vh;
+
+    @media (max-width: 650px) {
+    .ce-toolbar__plus svg,
+    .ce-toolbar__settings-btn svg {
+        color: ${color.primaryColor} !important;
+            background-color: ${color.whiteColor} !important;
+    }
+    }
 `;
 const TextArea = styled.div`
     min-width: 80%;

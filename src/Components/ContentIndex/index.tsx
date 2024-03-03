@@ -57,7 +57,7 @@ export const ContentIndex = () => {
                         helps you maintain focus and productivity by offering a
                         clear view of what needs to be done and when.
                     </DescriptionContent>
-                    <Link to="Tickets">
+                    <Link to="/Tickets">
                         <Button>Make It Happen!</Button>
                     </Link>
                 </ContainerTexsContent>
@@ -81,7 +81,7 @@ export const ContentIndex = () => {
                         your notes with colleagues or collaborators for better
                         team collaboration and communication.
                     </DescriptionContent>
-                    <Link to="Notes">
+                    <Link to="/Notes">
                         <Button>Write Your Story!</Button>
                     </Link>
                 </ContainerTexsContent>
