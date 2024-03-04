@@ -57,31 +57,28 @@ export const NoteAlone = () => {
             }
         };
     }, []);
-        useEffect(() => {
-            if (editorInstance.current && content && content.blocks) {
-                editorInstance.current.isReady
-                    .then(() => {
-                        editorInstance.current?.render(content) 
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-            }
-        }, [content]);
-
     useEffect(() => {
-
-
+        if (editorInstance.current && content && content.blocks) {
+            editorInstance.current.isReady
+                .then(() => {
+                    editorInstance.current?.render(content);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    }, [content]);
+    
+    useEffect(() => {
         const storedData = JSON.parse(
             window.localStorage.getItem("note") || "{}"
         );
 
-        if(storedData){
+        if (storedData) {
             setContent(storedData);
-        }else{
-            setContent("")
+        } else {
+            setContent("");
         }
-
     }, [id]);
 
     return (
@@ -161,11 +158,11 @@ const OptionColors = styled.div`
     min-height: 100vh;
 
     @media (max-width: 650px) {
-    .ce-toolbar__plus svg,
-    .ce-toolbar__settings-btn svg {
-        color: ${color.primaryColor} !important;
+        .ce-toolbar__plus svg,
+        .ce-toolbar__settings-btn svg {
+            color: ${color.primaryColor} !important;
             background-color: ${color.whiteColor} !important;
-    }
+        }
     }
 `;
 const TextArea = styled.div`

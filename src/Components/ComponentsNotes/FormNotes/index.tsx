@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import * as color from "../../../Theme";
 
 export const FormNote = () => {
-    const { titleNote, changeTitleNote, handleCreateNote, tickets, notes } = useContextFnc();
+    const { titleNote, changeTitleNote, handleCreateNote, tickets } = useContextFnc();
 
     const [assignee, setAssignee] = useState("");
 
