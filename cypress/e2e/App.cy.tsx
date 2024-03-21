@@ -37,12 +37,12 @@ describe("App",()=>{
         cy.visit("http://localhost:3000/")
     });
     
-    it("The nav button tickets works.", () => {
-        cy.contains("Get Rolling!").click()
+    it("The nav button form tickets works.", () => {
+        cy.contains("New ticket").click()
         cy.visit("http://localhost:3000/tickets")
     });
 
-    it("The nav button tasks works.", () => {
+    it("The nav button tickets works.", () => {
         cy.contains("Tickets").click()
         cy.visit("http://localhost:3000/tickets")
     });
@@ -52,11 +52,9 @@ describe("App",()=>{
         cy.visit("http://localhost:3000/notes")
     });
 
-    // Create a ticket, a ticket and a task and create a note
+    // Create a ticket,create a task and create a note
 
     it("Create a ticket.", () => {
-        cy.contains("Get Rolling!").click()
-        cy.visit("http://localhost:3000/tickets")
         cy.contains("New ticket").click()
 
         cy.get('[placeholder="Title"]').type("Create a website");
@@ -66,8 +64,6 @@ describe("App",()=>{
     });
 
     it("Create a ticket and a task.",()=> {
-        cy.contains("Brainstorms to Brilliance: Synapsify's Note-taking Magic!").click()
-        cy.visit("http://localhost:3000/tickets")
         cy.contains("New ticket").click()
 
         cy.get('[placeholder="Title"]').type("Create a web");
@@ -85,8 +81,6 @@ describe("App",()=>{
     });
 
     it("Create a ticket and a task and mark as completed.",()=> {
-        cy.contains("Brainstorms to Brilliance: Synapsify's Note-taking Magic!").click()
-        cy.visit("http://localhost:3000/tickets")
         cy.contains("New ticket").click()
 
         cy.get('[placeholder="Title"]').type("Create a website");
@@ -106,8 +100,6 @@ describe("App",()=>{
     });
 
     it("Create a ticket and a task and edit it.",()=> {
-        cy.contains("Brainstorms to Brilliance: Synapsify's Note-taking Magic!").click()
-        cy.visit("http://localhost:3000/tickets")
         cy.contains("New ticket").click()
 
         cy.get('[placeholder="Title"]').type("Create a website");
@@ -123,7 +115,7 @@ describe("App",()=>{
         cy.get('[placeholder="Description"]').type("Create the registration form for the website");
         cy.get('[type="submit"]').click();
 
-        cy.get('[data-testid="edit-icon-cypress"]', { timeout: 2000 }).click()
+        cy.get('[data-testid="edit-icon"]', { timeout: 2000 }).click()
         
         cy.get('[placeholder="Title"]').clear().type("Create navbar");
         cy.get('[placeholder="Description"]').clear().type("Create the navbar for the page");
@@ -131,8 +123,6 @@ describe("App",()=>{
     });
 
     it("Create a ticket and a task and delete it.",()=> {
-        cy.contains("Brainstorms to Brilliance: Synapsify's Note-taking Magic!").click()
-        cy.visit("http://localhost:3000/tickets")
         cy.contains("New ticket").click()
 
         cy.get('[placeholder="Title"]').type("Create a website");
@@ -148,7 +138,7 @@ describe("App",()=>{
         cy.get('[placeholder="Description"]').type("Create the registration form for the website");
         cy.get('[type="submit"]').click();
 
-        cy.get('[data-testid="exit-icon-cypress"]', { timeout: 2000 }).click()
+        cy.get('[data-testid="exit-icon"]', { timeout: 2000 }).click()
     });
 
     it("Create a note.",()=> {
@@ -221,7 +211,7 @@ describe("App",()=>{
     });
 
 
-    it.only("Create a note and create a header and a text on it.",()=> {
+    it("Create a note and create a header and a text on it.",()=> {
         cy.contains("Write Your Story!").click()
         cy.visit("http://localhost:3000/notes")
         cy.get('[placeholder="Title"]').type("My first note");

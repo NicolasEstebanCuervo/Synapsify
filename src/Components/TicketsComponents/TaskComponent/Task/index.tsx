@@ -66,10 +66,10 @@ export const Task = ({ task }: { task: ITask }) => {
                     </FirstSubContainerTask>
                     <SecondSubContainerTask>
                         <Button>
-                            <EditIcon data-testid="edit-icon-cypress" onClick={handleEdit}></EditIcon>
+                            <EditIcon data-testid="edit-icon" onClick={handleEdit}></EditIcon>
                         </Button>
                         <Button>
-                            <ExitIcon data-testid="exit-icon-cypress" onClick={taskDeleteFnc}></ExitIcon>
+                            <ExitIcon data-testid="exit-icon" onClick={taskDeleteFnc}></ExitIcon>
                         </Button>
                     </SecondSubContainerTask>
                 </ContainerTask>
