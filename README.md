@@ -42,4 +42,4 @@ En caso tal de que te interese alguna de las librerias usadas aca te dejo una li
 - Uuid : npm install uuid.
 - Emotion : npm install @emotion/react @emotion/styled.
 - Cypress : npm install cypress.
-- Jest - Testing Library : (Vienen por defecto en React)
+- Jest-Testing Library : (Vienen por defecto en React)
