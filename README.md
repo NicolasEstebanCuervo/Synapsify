@@ -1,7 +1,7 @@
 <div id="Header" align="center">
 
    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmJ5Z25xbjh5bTRpd2U3MHd1azFxeHE4ZTAxZWk0NGs2MXpiMDU1aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/dQpUkK59l5Imxsh8jN/giphy.gif" width="300">   
-   <h1 align="center">Synapsify 📒 - Documentando storybook </h1>
+   <h1 align="center">Synapsify 📒 </h1>
 
 </div>
 
