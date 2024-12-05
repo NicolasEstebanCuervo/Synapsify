@@ -1,22 +1,19 @@
 import { useContextFnc } from "../../Context";
 import { TicketWithTasks } from "../../Components/TicketsComponents/TicketWithTasks";
-import { NavBar } from "../../Components/NavBar";
 import styled from "@emotion/styled";
-import * as color from "../../Theme"
+import * as color from "../../Theme";
 
 export const TicketPage = () => {
     const { ticket } = useContextFnc();
 
     return (
         <Container>
-            <NavBar />
-            <TicketWithTasks  ticket={ticket} />
+            <TicketWithTasks ticket={ticket} />
         </Container>
     );
 };
 
-
-const Container = styled.main`
+const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;

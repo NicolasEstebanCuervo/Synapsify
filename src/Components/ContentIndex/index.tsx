@@ -94,7 +94,7 @@ export const ContentIndex = () => {
     );
 };
 
-const MainContent = styled.main`
+const MainContent = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;

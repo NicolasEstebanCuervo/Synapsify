@@ -1,16 +1,18 @@
+import { Outlet } from "react-router-dom";
+import { NavBar } from "../Components/NavBar";
 import styled from "@emotion/styled";
-import { FormNote } from "../../Components/ComponentsNotes/FormNotes";
-import * as color from "../../Theme";
+import * as color from "../Theme"
 
-export const NotesPage = () => {
+function Layout() {
     return (
         <Container>
-            <FormNote />
+            <NavBar/>
+            <Outlet />
         </Container>
     );
-};
+}
 
-const Container = styled.div`
+const Container = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,3 +21,5 @@ const Container = styled.div`
     min-height: 100vh;
     background: ${color.primaryColor};
 `;
+
+export default Layout;

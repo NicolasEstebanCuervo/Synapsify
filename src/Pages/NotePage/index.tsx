@@ -1,25 +1,23 @@
-import { NavBar } from "../../Components/NavBar";
-import { NoteAlone } from "../../Components/ComponentsNotes/NoteAlone"
+import { NoteAlone } from "../../Components/ComponentsNotes/NoteAlone";
 import { useContextFnc } from "../../Context";
 import styled from "@emotion/styled";
-import * as color from "../../Theme"
+import * as color from "../../Theme";
 
-export const NotePage = ()=>{
-    const {note} = useContextFnc();
+export const NotePage = () => {
+    const { note } = useContextFnc();
 
-    if(!note){
-        return null
+    if (!note) {
+        return null;
     }
 
-    return(
+    return (
         <Container>
-            <NavBar />
-            <NoteAlone/>
+            <NoteAlone />
         </Container>
-    )
-}
+    );
+};
 
-const Container = styled.main`
+const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;

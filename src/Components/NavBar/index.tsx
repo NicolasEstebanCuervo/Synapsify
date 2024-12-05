@@ -19,7 +19,7 @@ export const NavBar = () => {
 
     return (
         <NavSection>
-            <NavBarContainer data-testid="nav-bar" expand="lg" data-bs-theme="dark">
+            <NavBarContainer expand="lg" data-bs-theme="dark">
                 <Navbar.Toggle
                     aria-controls="basic-navbar-nav show "
                     onClick={handleClick}

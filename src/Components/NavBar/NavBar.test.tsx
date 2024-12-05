@@ -1,58 +1,84 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import ContextAppComponent from "../../Context";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { ContentIndex } from "../ContentIndex";
+import { TicketsPage } from "../../Pages/TicketsPage";
 import { NavBar } from ".";
-import { BrowserRouter } from "react-router-dom";
+import { NotesPage } from "../../Pages/NotesPage";
 
-test("Navbar is in the document.", () => {
+test("Should navigate to /home when clicking the home navbar button", async () => {
+    const initialRoute = "/tickets";
     render(
         <ContextAppComponent>
-            <BrowserRouter>
+            <MemoryRouter initialEntries={[initialRoute]}>
                 <NavBar />
-            </BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<ContentIndex />} />
+                    <Route path="/tickets" element={<TicketsPage />} />
+                </Routes>
+            </MemoryRouter>
         </ContextAppComponent>
     );
 
-    const navBar = screen.getByTestId("nav-bar");
-    expect(navBar).toBeInTheDocument;
-});
+    const button = screen.getByText(/Home/i);
+    fireEvent.click(button);
+    
+    await expect(screen.getByText(/Sail the tide of productivity with Sinapsify./i)).toBeInTheDocument();
+});  
 
-test("The new ticket button works.", () => {
-    const mockIncrement = jest.fn();
-    jest.mock("./", () => ({ toggleNewTicketFnc: mockIncrement }));
+test("Should navigate to the new ticket page when clicking the new ticket navbar button", async () => {
+    const initialRoute = "/";
     render(
         <ContextAppComponent>
-            <BrowserRouter>
-                <NavBar />
-            </BrowserRouter>
+            <MemoryRouter initialEntries={[initialRoute]}>
+                <Routes>
+                    <Route path="/" element={<NavBar />} />
+                    <Route path="/tickets" element={<TicketsPage />} />
+                </Routes>
+            </MemoryRouter>
         </ContextAppComponent>
     );
-    const navButton = screen.getByText("New ticket");
-    fireEvent.click(navButton);
-    expect(navButton).toBeInTheDocument;
-    expect(navButton).toHaveBeenCalled;
-});
 
-test("The new tickets button works.", () => {
+    const button = screen.getByText(/New ticket/i);
+    fireEvent.click(button);
+
+    await expect(screen.getByText(/Create a ticket for your project./i)).toBeInTheDocument();
+});  
+
+test("Should navigate to /tickets and display the list of created tickets", async () => {
+    const initialRoute = "/";
     render(
         <ContextAppComponent>
-            <BrowserRouter>
-                <NavBar />
-            </BrowserRouter>
+            <MemoryRouter initialEntries={[initialRoute]}>
+                <Routes>
+                    <Route path="/" element={<NavBar />} />
+                    <Route path="/tickets" element={<TicketsPage />} />
+                </Routes>
+            </MemoryRouter>
         </ContextAppComponent>
     );
-    const navButton = screen.getByText("Tickets");
-    fireEvent.click(navButton);
-    expect(navButton).toBeInTheDocument;
-});
 
-test("The Create a note button works.", () => {
+    const button = screen.getByText("Tickets");
+    fireEvent.click(button);
+
+    await expect(screen.getByText(/Last tickets/i)).toBeInTheDocument();
+});  
+
+test("Should navigate to /notes and display the list of created notes", async () => {
+    const initialRoute = "/";
     render(
         <ContextAppComponent>
-            <BrowserRouter>
-                <NavBar />
-            </BrowserRouter>
+            <MemoryRouter initialEntries={[initialRoute]}>
+                <Routes>
+                    <Route path="/" element={<NavBar />} />
+                    <Route path="/notes" element={<NotesPage />} />
+                </Routes>
+            </MemoryRouter>
         </ContextAppComponent>
     );
-    const navButton = screen.getByText("Create a note");
-    expect(navButton).toBeInTheDocument;
-});
+
+    const button = screen.getByText("Create a note");
+    fireEvent.click(button);
+
+    await expect(screen.getByText(/Recent notes/i)).toBeInTheDocument();
+}); 

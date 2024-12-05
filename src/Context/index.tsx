@@ -1,6 +1,8 @@
 import {
     ChangeEvent,
+    Dispatch,
     ReactNode,
+    SetStateAction,
     createContext,
     useContext,
     useEffect,
@@ -49,6 +51,9 @@ interface IContextProps {
     titleTicket: string;
     assigneeTicket: string;
     priorityTicket: string;
+    setTitleTicket: Dispatch<SetStateAction<string>>;
+    setAssigneeTicket: Dispatch<SetStateAction<string>>;
+    setPriorityTicket: Dispatch<SetStateAction<string>>;
     changeTitleTicket: (e: ChangeEvent<HTMLInputElement>) => void;
     changeAssigneeTicket: (e: ChangeEvent<HTMLInputElement>) => void;
     changePriorityTicket: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -200,14 +205,14 @@ export default function ContextAppComponent({
         });
     };
 
-    const editTicket = (ticket: ITicket) => {
+    const editTicket = (ticketEdit: ITicket) => {
         setTickets((tickets) => {
             const index = tickets.findIndex(
-                (ticket) => ticket.idTicket === ticket.idTicket
+                (ticket) => ticket.idTicket === ticketEdit.idTicket
             );
             if (index !== -1) {
                 const updatedTickets = [...tickets];
-                updatedTickets[index] = ticket;
+                updatedTickets[index] = ticketEdit;
                 return updatedTickets;
             } else {
                 return tickets;
@@ -457,6 +462,9 @@ export default function ContextAppComponent({
                 assigneeTicket,
                 priorityTicket,
                 tickets,
+                setTitleTicket,
+                setAssigneeTicket,
+                setPriorityTicket,
                 changeTitleTicket,
                 changeAssigneeTicket,
                 changePriorityTicket,

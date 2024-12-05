@@ -8,7 +8,7 @@ import EditIcon from "../../../Assets/Icons/EditIcon";
 import { FormTickets } from "../FormTickets";
 
 export const Ticket = ({ ticket }: { ticket: ITicket }) => {
-    const { onClickTicket, ticketDelete, getIdTicket } = useContextFnc();
+    const { onClickTicket, ticketDelete, getIdTicket,setTitleTicket,setAssigneeTicket,setPriorityTicket } = useContextFnc();
     const [edit, setEdit] = useState(false);
 
     const createTicketPage = () => {
@@ -22,16 +22,22 @@ export const Ticket = ({ ticket }: { ticket: ITicket }) => {
     const handleEditar = () => {
         setEdit(!edit);
         getIdTicket(ticket.idTicket);
+
+        setTitleTicket(ticket.titleTicket) 
+        setAssigneeTicket(ticket.assigneeTicket)
+        setPriorityTicket(ticket.priorityTicket)
     };
 
     return (
-        <TableRow edit={!edit} data-testid="ticket">
+        <TableRow edit={!edit}>
             {edit ? (
                 <>
                     <FormTickets
-                        text="Edit the ticket"
+                        title="Edit the ticket"
+                        subtitle="Edit and Manage Your Ticket Details"
                         ticket={ticket}
                         setEdit={setEdit}
+                        edit={edit}
                     />
                 </>
             ) : (
@@ -41,7 +47,7 @@ export const Ticket = ({ ticket }: { ticket: ITicket }) => {
                         <LinkTableCell
                             to={`/Ticket/${ticket.idTicket}`}
                             onClick={createTicketPage}
-                        >
+                            data-testid="ticket-title">
                             <Label>Title:</Label>
 
                             {ticket.titleTicket}
@@ -60,10 +66,10 @@ export const Ticket = ({ ticket }: { ticket: ITicket }) => {
                     </TableCell>
                     <TableCell>
                         <Button>
-                            <EditIcon onClick={handleEditar} />
+                            <EditIcon data-testid="edit-button" onClick={handleEditar} />
                         </Button>
                         <Button>
-                            <ExitIcon onClick={onDeleteTicket} />
+                            <ExitIcon data-testid="delete-button" onClick={onDeleteTicket} />
                         </Button>
                     </TableCell>
                 </>

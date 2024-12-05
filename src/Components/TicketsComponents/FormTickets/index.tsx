@@ -6,14 +6,18 @@ import * as color from "../../../Theme";
 interface FormTicketsProps {
     ticket?: ITicket;
     setEdit?: React.Dispatch<React.SetStateAction<boolean>>;
-    text: string;
+    edit?: boolean;
+    title: string;
+    subtitle: string;
 }
 
-export const FormTickets: React.FC<FormTicketsProps> = ({
+export const FormTickets = ({
     ticket,
     setEdit,
-    text,
-}) => {
+    edit,
+    title,
+    subtitle,
+}:FormTicketsProps) => {
     const {
         titleTicket,
         assigneeTicket,
@@ -24,8 +28,7 @@ export const FormTickets: React.FC<FormTicketsProps> = ({
         handleSubmitTicket,
         updateTicket,
         getIdTicket,
-        tickets,
-        toggleNewTicket
+        toggleNewTicket,
     } = useContextFnc();
 
     const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +47,6 @@ export const FormTickets: React.FC<FormTicketsProps> = ({
         toggleNewTicket();
     };
 
-
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (ticket) {
@@ -61,11 +63,9 @@ export const FormTickets: React.FC<FormTicketsProps> = ({
     return (
         <SectionFormTickets>
             <ContainerFormTickets>
-                <TitleFormTickets>{text}</TitleFormTickets>
-                <TextFormTickets>
-                    Create a ticket for your project.
-                </TextFormTickets>
-                <Form data-testid="ticket-form" action="" onSubmit={handleSubmit}>
+                <TitleFormTickets>{title}</TitleFormTickets>
+                <TextFormTickets>{subtitle}</TextFormTickets>
+                <Form action="" onSubmit={handleSubmit}>
                     <Input
                         type="text"
                         onChange={onChangeTitle}
@@ -87,9 +87,21 @@ export const FormTickets: React.FC<FormTicketsProps> = ({
                         placeholder="Priority"
                         maxLength={10}
                     />
-                    <Button type="submit">Create a ticket</Button>
-                    {tickets.length > 0 && (
-                        <Button onClick={()=>(toggleNewTicketFnc)}>Return to tickets</Button>
+
+                    {titleTicket.length > 0 &&
+                        assigneeTicket.length > 0 &&
+                        priorityTicket.length > 0 && (
+                            <Button data-testid="create-ticket-button" type="submit">
+                                {edit ? "Edit ticket" : "Create ticket"}
+                            </Button>
+                        )}
+
+                    {edit ? (
+                        <></>
+                    ) : (
+                        <Button onClick={toggleNewTicketFnc}>
+                            Return to tickets
+                        </Button>
                     )}
                 </Form>
             </ContainerFormTickets>
@@ -97,7 +109,7 @@ export const FormTickets: React.FC<FormTicketsProps> = ({
     );
 };
 
-const SectionFormTickets = styled.main`
+const SectionFormTickets = styled.div`
     width: 100%;
     height: 80vh;
     display: flex;

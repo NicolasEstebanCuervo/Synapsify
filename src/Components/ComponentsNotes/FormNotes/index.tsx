@@ -5,7 +5,8 @@ import styled from "@emotion/styled";
 import * as color from "../../../Theme";
 
 export const FormNote = () => {
-    const { titleNote, changeTitleNote, handleCreateNote, tickets } = useContextFnc();
+    const { titleNote, changeTitleNote, handleCreateNote, tickets } =
+        useContextFnc();
 
     const [assignee, setAssignee] = useState("");
 
@@ -50,19 +51,21 @@ export const FormNote = () => {
                         ))}
                     </Select>
 
-                        <ContainerNotes>
-                            <TextNote>Recent notes</TextNote>
-                                <Notes />
-                        </ContainerNotes>
+                    <ContainerNotes>
+                        <TextNote>Recent notes</TextNote>
+                        <Notes />
+                    </ContainerNotes>
 
-                    <Button type="submit" data-testid="button-form-notes">Create a note</Button>
+                    <Button type="submit" data-testid="button-form-notes">
+                        Create a note
+                    </Button>
                 </Form>
             </ContainerFormTickets>
         </SectionFormTickets>
     );
 };
 
-const SectionFormTickets = styled.main`
+const SectionFormTickets = styled.div`
     width: 80%;
     display: flex;
     justify-content: center;

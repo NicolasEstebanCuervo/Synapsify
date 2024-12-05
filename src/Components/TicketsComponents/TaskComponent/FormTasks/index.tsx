@@ -8,15 +8,17 @@ interface FormTicketsProps {
     task?: ITask;
     setEdit?: React.Dispatch<React.SetStateAction<boolean>>;
     text: string;
+    edit?: boolean;
 }
 
-export const FormTasks: React.FC<FormTicketsProps> = ({
+export const FormTasks = ({
     ticketId,
     task,
     setEdit,
+    edit,
     text,
-}) => {
-    const { tasks, updateTasks, toggleHiddenTicket} = useContextFnc();
+}: FormTicketsProps) => {
+    const { tasks, updateTasks, toggleHiddenTicket } = useContextFnc();
     const { handleSubmitTask } = useContextFnc();
     const [titleTask, setTitleTask] = useState(task?.titleTask || "");
     const [descriptionTask, setDescriptionTask] = useState(
@@ -94,22 +96,24 @@ export const FormTasks: React.FC<FormTicketsProps> = ({
                         maxLength={50}
                     />
 
-                    <Button
-                        type="submit"
-                        disabled={
-                            !setEdit &&
-                            (!titleTask.trim() || !descriptionTask.trim())
-                        }
-                    >
-                        Create a task
-                    </Button>
+                    {titleTask.length > 0 &&
+                        descriptionTask.length > 0 &&
+                        (edit ? (
+                            <>
+                                <Button type="submit">Edit task</Button>
+                            </>
+                        ) : (
+                            <>
+                                <Button type="submit">Create a task</Button>
+                            </>
+                        ))}
                 </Form>
             </ContainerFormTickets>
         </SectionFormTickets>
     );
 };
 
-const SectionFormTickets = styled.main`
+const SectionFormTickets = styled.div`
     width: 100%;
     height: 80vh;
     display: flex;

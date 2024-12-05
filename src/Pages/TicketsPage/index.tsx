@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
-import { NavBar } from "../../Components/NavBar";
 import { FormTickets } from "../../Components/TicketsComponents/FormTickets";
 import { useContextFnc } from "../../Context";
 import { Tickets } from "../../Components/TicketsComponents/Tickets";
-import * as color from "../../Theme"
+import * as color from "../../Theme";
 
 export const TicketsPage = () => {
     const { tickets, newTicket, idTicket } = useContextFnc();
@@ -11,10 +10,12 @@ export const TicketsPage = () => {
     return (
         <Container>
             {tickets.length === 0 || newTicket ? (
-                <FormTickets text="Create a ticket" />
+                <FormTickets
+                    title="Create ticket"
+                    subtitle="Create a ticket for your project."
+                />
             ) : (
                 <>
-                    <NavBar />
                     <Tickets idFilter={idTicket} />
                 </>
             )}
@@ -22,7 +23,7 @@ export const TicketsPage = () => {
     );
 };
 
-const Container = styled.main`
+const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
