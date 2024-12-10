@@ -50,9 +50,9 @@ test('Should show the "Create ticket" button when all inputs have text', async (
     const assigneeInput = screen.getByPlaceholderText("Assignee");
     const priorityInput = screen.getByPlaceholderText("Priority");
 
-    fireEvent.change(titleInput, { target: { value: "Title" } });
-    fireEvent.change(assigneeInput, { target: { value: "Assignee" } });
-    fireEvent.change(priorityInput, { target: { value: "Priority" } });
+    fireEvent.change(titleInput, { target: { value: "Important bug" } });
+    fireEvent.change(assigneeInput, { target: { value: "Nico Rojas" } });
+    fireEvent.change(priorityInput, { target: { value: "Very important" } });
 
     const button = await screen.findByTestId("create-ticket-button");
 

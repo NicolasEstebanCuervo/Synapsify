@@ -39,23 +39,24 @@ export const TicketWithTasks = ({ ticket }: { ticket: ITicket | any }) => {
     };
 
     return (
-        <SectionTicket>
+        <Container>
             {!isTicketHidden ? (
                 <>
-                    <ContainerInfoTicket>
-                        <TitleTicket>{ticketData.titleTicket}</TitleTicket>
+                    <InfoTicket>
+                        <Title>{ticketData.titleTicket}</Title>
                         <ContainerSubtitles>
-                            <SubContainerSubtitles>
-                                <SubtitlesTickets>
-                                    {ticketData.assigneeTicket}
-                                </SubtitlesTickets>
-                                <SubtitlesTickets>
-                                    {ticketData.priorityTicket}
-                                </SubtitlesTickets>
-                            </SubContainerSubtitles>
-                            <AddIcon data-testid="add-icon-cypress" onClick={toggleHidden}>+</AddIcon>
+                            <TicketDetails>
+                                <Subtitle>{ticketData.assigneeTicket}</Subtitle>
+                                <Subtitle>{ticketData.priorityTicket}</Subtitle>
+                            </TicketDetails>
+                            <AddIcon
+                                data-testid="add-icon-cypress"
+                                onClick={toggleHidden}
+                            >
+                                +
+                            </AddIcon>
                         </ContainerSubtitles>
-                    </ContainerInfoTicket>
+                    </InfoTicket>
 
                     <Tasks ticketId={ticket.idTicket} />
                 </>
@@ -67,11 +68,11 @@ export const TicketWithTasks = ({ ticket }: { ticket: ITicket | any }) => {
                     />
                 </>
             )}
-        </SectionTicket>
+        </Container>
     );
 };
 
-const SectionTicket = styled.section`
+const Container = styled.section`
     width: 60%;
     min-height: 100vh;
     gap: 3rem;
@@ -91,7 +92,7 @@ const SectionTicket = styled.section`
     }
 `;
 
-const ContainerInfoTicket = styled.div`
+const InfoTicket = styled.div`
     display: flex;
     gap: 1rem;
     flex-direction: column;
@@ -99,11 +100,10 @@ const ContainerInfoTicket = styled.div`
     @media (max-width: 400px) {
         gap: 0.2rem;
     }
-
 `;
 
-const TitleTicket = styled.h1`
-    color: ${color.textColor};
+const Title = styled.h1`
+    color: ${color.textPrimaryColor};
     font-size: 2.5rem;
     font-weight: bold;
     margin: 0;
@@ -135,7 +135,7 @@ const ContainerSubtitles = styled.div`
     }
 `;
 
-const SubContainerSubtitles = styled.div`
+const TicketDetails = styled.div`
     display: flex;
     gap: 0.5rem;
     align-items: center;
@@ -145,13 +145,13 @@ const SubContainerSubtitles = styled.div`
     }
 `;
 
-const SubtitlesTickets = styled.h3`
+const Subtitle = styled.h3`
     display: inline-block;
     background: ${color.grayColor};
     padding: 0.2rem 1rem;
     border-radius: 0.5rem;
     font-size: 1rem;
-    color: ${color.textColor};
+    color: ${color.textPrimaryColor};
     margin: 0;
 
     @media (max-width: 1000px) {

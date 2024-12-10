@@ -8,17 +8,17 @@ export const Tasks = ({ ticketId }: { ticketId: string }) => {
     const filteredTasks = tasks.filter((task) => task.idTicket === ticketId);
 
     return (
-        <ContainerTasks data-testid="tasks">
+        <TasksContainer data-testid="tasks">
             {filteredTasks.map((task) => (
-                <ContainerTask key={task.idTask}> 
-                <Task task={task}  />
-                </ContainerTask>
+                <TaskContainer key={task.idTask}>
+                    <Task task={task} />
+                </TaskContainer>
             ))}
-        </ContainerTasks>
+        </TasksContainer>
     );
 };
 
-const ContainerTasks = styled.div`
+const TasksContainer = styled.section`
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -27,6 +27,6 @@ const ContainerTasks = styled.div`
     align-items: center;
 `;
 
-const ContainerTask = styled.div`
+const TaskContainer = styled.div`
     width: 100%;
-`
+`;

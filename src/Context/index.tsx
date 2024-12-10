@@ -32,8 +32,8 @@ export interface ITask {
 
 export interface INote {
     idNote: string;
-    titleNote: string;
-    assigneeNote?: string;
+    NoteTitle: string;
+    NoteAssignee?: string;
 }
 
 interface IContextProps {
@@ -51,10 +51,10 @@ interface IContextProps {
     titleTicket: string;
     assigneeTicket: string;
     priorityTicket: string;
-    setTitleTicket: Dispatch<SetStateAction<string>>;
+    setTitle: Dispatch<SetStateAction<string>>;
     setAssigneeTicket: Dispatch<SetStateAction<string>>;
     setPriorityTicket: Dispatch<SetStateAction<string>>;
-    changeTitleTicket: (e: ChangeEvent<HTMLInputElement>) => void;
+    changeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
     changeAssigneeTicket: (e: ChangeEvent<HTMLInputElement>) => void;
     changePriorityTicket: (e: ChangeEvent<HTMLInputElement>) => void;
     handleSubmitTicket: () => void;
@@ -75,9 +75,9 @@ interface IContextProps {
     // Notes props.
     note: INote | undefined;
     notes: INote[];
-    titleNote: string;
+    NoteTitle: string;
     onClickNote: (note: INote) => void;
-    changeTitleNote: (e: ChangeEvent<HTMLInputElement>) => void;
+    changeNoteTitle: (e: ChangeEvent<HTMLInputElement>) => void;
     createNote: (note: INote) => void;
     noteDelete: (id: string) => void;
     handleCreateNote: (assignee: string) => void;
@@ -110,7 +110,7 @@ export default function ContextAppComponent({
     // Funtions for the tickets
 
     const [ticket, setTicket] = useState<ITicket>();
-    const [titleTicket, setTitleTicket] = useState("");
+    const [titleTicket, setTitle] = useState("");
     const [assigneeTicket, setAssigneeTicket] = useState("");
     const [priorityTicket, setPriorityTicket] = useState("");
     const [tickets, setTickets] = useState<ITicket[]>([]);
@@ -136,13 +136,13 @@ export default function ContextAppComponent({
         const defaultNotes: INote[] = [
             {
                 idNote: "ajsn1kasd",
-                titleNote: "Urgent Fix Needed",
-                assigneeNote: "John Smith",
+                NoteTitle: "Urgent Fix Needed",
+                NoteAssignee: "John Smith",
             },
             {
                 idNote: "wzxco1sd",
-                titleNote: "User Profile Display Issue",
-                assigneeNote: "Emily Brown",
+                NoteTitle: "User Profile Display Issue",
+                NoteAssignee: "Emily Brown",
             },
         ];
         setNotes(defaultNotes);
@@ -153,8 +153,8 @@ export default function ContextAppComponent({
         localStorage.setItem("ticket", JSON.stringify(ticket));
     };
 
-    const changeTitleTicket = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitleTicket(e.target.value);
+    const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value);
     };
 
     const changeAssigneeTicket = (e: ChangeEvent<HTMLInputElement>) => {
@@ -171,17 +171,13 @@ export default function ContextAppComponent({
 
     const handleSubmitTicket = () => {
         if (newTicket) {
-            setTitleTicket("");
+            setTitle("");
             setAssigneeTicket("");
             setPriorityTicket("");
             setNewTicket(false);
         }
 
-        if (
-            !titleTicket.trim() ||
-            !assigneeTicket.trim() ||
-            !priorityTicket.trim()
-        ) {
+        if (!titleTicket.trim() || !assigneeTicket.trim() || !priorityTicket.trim()) {
             return;
         }
         const ticketNew: ITicket = {
@@ -191,7 +187,7 @@ export default function ContextAppComponent({
             priorityTicket: priorityTicket,
         };
         createTicket(ticketNew);
-        setTitleTicket("");
+        setTitle("");
         setAssigneeTicket("");
         setPriorityTicket("");
         setNewTicket(false);
@@ -238,7 +234,7 @@ export default function ContextAppComponent({
             }
         });
         setTickets(updatedTickets);
-        setTitleTicket("");
+        setTitle("");
         setAssigneeTicket("");
         setPriorityTicket("");
     };
@@ -384,25 +380,25 @@ export default function ContextAppComponent({
 
     const [note, setNote] = useState<INote>();
     const [notes, setNotes] = useState<INote[]>([]);
-    const [titleNote, setTitleNote] = useState("");
+    const [NoteTitle, setNoteTitle] = useState("");
 
     const onClickNote = (note: INote) => {
         setNote(note);
         localStorage.setItem("note", JSON.stringify(note));
     };
 
-    const changeTitleNote = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitleNote(e.target.value);
+    const changeNoteTitle = (e: ChangeEvent<HTMLInputElement>) => {
+        setNoteTitle(e.target.value);
     };
 
     const handleCreateNote = (assignee: string) => {
         const newNote: INote = {
-            titleNote: titleNote,
+            NoteTitle: NoteTitle,
             idNote: uuidv4(),
-            assigneeNote: assignee,
+            NoteAssignee: assignee,
         };
         createNote(newNote);
-        setTitleNote("");
+        setNoteTitle("");
         setNote(newNote);
     };
 
@@ -413,10 +409,10 @@ export default function ContextAppComponent({
             localStorage.setItem(
                 "note",
                 JSON.stringify(
-                    updatedNotes.map(({ idNote, titleNote, assigneeNote }) => ({
+                    updatedNotes.map(({ idNote, NoteTitle, NoteAssignee }) => ({
                         idNote,
-                        titleNote,
-                        assigneeNote,
+                        NoteTitle,
+                        NoteAssignee,
                     }))
                 )
             );
@@ -462,10 +458,10 @@ export default function ContextAppComponent({
                 assigneeTicket,
                 priorityTicket,
                 tickets,
-                setTitleTicket,
+                setTitle,
                 setAssigneeTicket,
                 setPriorityTicket,
-                changeTitleTicket,
+                changeTitle,
                 changeAssigneeTicket,
                 changePriorityTicket,
                 handleSubmitTicket,
@@ -480,9 +476,9 @@ export default function ContextAppComponent({
                 updateTasks,
                 note,
                 notes,
-                titleNote,
+                NoteTitle,
                 onClickNote,
-                changeTitleNote,
+                changeNoteTitle,
                 createNote,
                 handleCreateNote,
                 noteDelete,

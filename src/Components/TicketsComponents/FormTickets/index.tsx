@@ -17,12 +17,12 @@ export const FormTickets = ({
     edit,
     title,
     subtitle,
-}:FormTicketsProps) => {
+}: FormTicketsProps) => {
     const {
         titleTicket,
         assigneeTicket,
         priorityTicket,
-        changeTitleTicket,
+        changeTitle,
         changeAssigneeTicket,
         changePriorityTicket,
         handleSubmitTicket,
@@ -32,7 +32,8 @@ export const FormTickets = ({
     } = useContextFnc();
 
     const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        changeTitleTicket(e);
+        changeTitle(e);
+        console.log(e.target.value)
     };
 
     const onChangeAssignee = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,10 +62,10 @@ export const FormTickets = ({
     };
 
     return (
-        <SectionFormTickets>
-            <ContainerFormTickets>
-                <TitleFormTickets>{title}</TitleFormTickets>
-                <TextFormTickets>{subtitle}</TextFormTickets>
+        <Container>
+            <FormContainer>
+                <Title>{title}</Title>
+                <Subtitle>{subtitle}</Subtitle>
                 <Form action="" onSubmit={handleSubmit}>
                     <Input
                         type="text"
@@ -91,7 +92,10 @@ export const FormTickets = ({
                     {titleTicket.length > 0 &&
                         assigneeTicket.length > 0 &&
                         priorityTicket.length > 0 && (
-                            <Button data-testid="create-ticket-button" type="submit">
+                            <Button
+                                data-testid="create-ticket-button"
+                                type="submit"
+                            >
                                 {edit ? "Edit ticket" : "Create ticket"}
                             </Button>
                         )}
@@ -104,12 +108,12 @@ export const FormTickets = ({
                         </Button>
                     )}
                 </Form>
-            </ContainerFormTickets>
-        </SectionFormTickets>
+            </FormContainer>
+        </Container>
     );
 };
 
-const SectionFormTickets = styled.div`
+const Container = styled.section`
     width: 100%;
     height: 80vh;
     display: flex;
@@ -117,7 +121,7 @@ const SectionFormTickets = styled.div`
     align-items: center;
 `;
 
-const ContainerFormTickets = styled.div`
+const FormContainer = styled.div`
     width: 40%;
 
     @media (max-width: 1000px) {
@@ -133,8 +137,8 @@ const ContainerFormTickets = styled.div`
     }
 `;
 
-const TitleFormTickets = styled.h1`
-    color: ${color.textColor};
+const Title = styled.h1`
+    color: ${color.textPrimaryColor};
     font-size: 3.5rem;
     font-weight: bold;
     text-align: left;
@@ -157,8 +161,8 @@ const TitleFormTickets = styled.h1`
     }
 `;
 
-const TextFormTickets = styled.h1`
-    color: ${color.textColorGray};
+const Subtitle = styled.h2`
+    color: ${color.textSecondaryColor};
     font-size: 1.2rem;
     text-align: left;
 
@@ -206,10 +210,10 @@ const Form = styled.form`
 const Input = styled.input`
     padding: 0.7rem 0.5rem;
     border-radius: 0.5rem;
-    background: ${color.placeHolderColor};
+    background: ${color.placeholderColor};
     border: none;
-    outline: 1px solid ${color.borderInputColor};
-    color: ${color.textColor};
+    outline: 1px solid ${color.inputBorderColor};
+    color: ${color.textPrimaryColor};
     font-size: 1.2rem;
     border: none;
 
@@ -236,8 +240,8 @@ const Button = styled.button`
     border-radius: 0.5rem;
     border: none;
     padding: 0.7rem 0;
-    background: ${color.tertiaryColor};
-    color: ${color.textColor};
+    background: ${color.accentColor};
+    color: ${color.textPrimaryColor};
 
     @media (max-width: 1000px) {
         font-size: 1rem;

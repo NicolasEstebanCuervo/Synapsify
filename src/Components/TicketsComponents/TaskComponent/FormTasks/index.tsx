@@ -74,12 +74,10 @@ export const FormTasks = ({
     };
 
     return (
-        <SectionFormTickets>
-            <ContainerFormTickets>
-                <TitleFormTickets>{text}</TitleFormTickets>
-                <TextFormTickets>
-                    Create a task to organize yourself better
-                </TextFormTickets>
+        <Container>
+            <FormContainer>
+                <Title>{text}</Title>
+                <Subtitle>Create a task to organize yourself better</Subtitle>
                 <Form data-testid="task-form" onSubmit={handleSubmit}>
                     <Input
                         type="text"
@@ -108,12 +106,12 @@ export const FormTasks = ({
                             </>
                         ))}
                 </Form>
-            </ContainerFormTickets>
-        </SectionFormTickets>
+            </FormContainer>
+        </Container>
     );
 };
 
-const SectionFormTickets = styled.div`
+const Container = styled.section`
     width: 100%;
     height: 80vh;
     display: flex;
@@ -121,7 +119,7 @@ const SectionFormTickets = styled.div`
     align-items: center;
 `;
 
-const ContainerFormTickets = styled.div`
+const FormContainer = styled.div`
     width: 60%;
 
     @media (max-width: 1000px) {
@@ -137,8 +135,8 @@ const ContainerFormTickets = styled.div`
     }
 `;
 
-const TitleFormTickets = styled.h1`
-    color: ${color.textColor};
+const Title = styled.h1`
+    color: ${color.textPrimaryColor};
     font-size: 3.5rem;
     font-weight: bold;
     text-align: left;
@@ -161,8 +159,8 @@ const TitleFormTickets = styled.h1`
     }
 `;
 
-const TextFormTickets = styled.h1`
-    color: ${color.textColorGray};
+const Subtitle = styled.h2`
+    color: ${color.textSecondaryColor};
     font-size: 1.2rem;
     text-align: left;
 
@@ -209,10 +207,10 @@ const Form = styled.form`
 const Input = styled.input`
     padding: 0.7rem 0.5rem;
     border-radius: 0.5rem;
-    background: ${color.placeHolderColor};
+    background: ${color.placeholderColor};
     border: none;
-    outline: 1px solid ${color.borderInputColor};
-    color: ${color.textColor};
+    outline: 1px solid ${color.inputBorderColor};
+    color: ${color.textPrimaryColor};
     font-size: 1.2rem;
     border: none;
 
@@ -239,8 +237,8 @@ const Button = styled.button`
     border-radius: 0.5rem;
     border: none;
     padding: 0.7rem 0;
-    background: ${color.tertiaryColor};
-    color: ${color.textColor};
+    background: ${color.accentColor};
+    color: ${color.textPrimaryColor};
 
     @media (max-width: 1000px) {
         font-size: 1rem;

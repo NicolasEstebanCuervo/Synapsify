@@ -2,8 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import ContextAppComponent from "../../Context";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { ContentIndex } from "../ContentIndex";
-import { TicketsPage } from "../../Pages/TicketsPage";
-import { NotesPage } from "../../Pages/NotesPage";
+import { NotesPage, TicketsPage } from "../../Pages";
 
 test("Should navigate to /tickets when clicking the get rolling button", async () => {
     const initialRoute = "/";

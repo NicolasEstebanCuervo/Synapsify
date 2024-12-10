@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ITask, useContextFnc } from "../../../../Context";
 import styled from "@emotion/styled";
 import { FormTasks } from "../FormTasks";
@@ -38,7 +38,7 @@ export const Task = ({ task }: { task: ITask }) => {
     };
 
     return (
-        <SectionTask>
+        <Container>
             {edit ? (
                 <>
                     <FormTasks
@@ -49,36 +49,40 @@ export const Task = ({ task }: { task: ITask }) => {
                     />
                 </>
             ) : (
-                <ContainerTask data-testid="task">
-                    <FirstSubContainerTask>
+                <TaskContainer data-testid="task">
+                    <InfoTask>
                         <Input
                             type="checkbox"
                             checked={isChecked}
                             onChange={handleCheckboxChange}
                             data-testid="check-box-cypress"
                         />
-                        <ContainerTextsTask>
-                            <TitleTask>{task.titleTask}</TitleTask>
-                            <DescriptionTask>
-                                {task.descriptionTask}
-                            </DescriptionTask>
-                        </ContainerTextsTask>
-                    </FirstSubContainerTask>
-                    <SecondSubContainerTask>
+                        <TextTask>
+                            <Title>{task.titleTask}</Title>
+                            <Description>{task.descriptionTask}</Description>
+                        </TextTask>
+                    </InfoTask>
+                    <TaskButtons>
                         <Button>
-                            <EditIcon data-testid="edit-icon" onClick={handleEdit}></EditIcon>
+                            <EditIcon
+                                data-testid="edit-icon"
+                                onClick={handleEdit}
+                            ></EditIcon>
                         </Button>
                         <Button>
-                            <ExitIcon data-testid="exit-icon" onClick={taskDeleteFnc}></ExitIcon>
+                            <ExitIcon
+                                data-testid="exit-icon"
+                                onClick={taskDeleteFnc}
+                            ></ExitIcon>
                         </Button>
-                    </SecondSubContainerTask>
-                </ContainerTask>
+                    </TaskButtons>
+                </TaskContainer>
             )}
-        </SectionTask>
+        </Container>
     );
 };
 
-const SectionTask = styled.section`
+const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,13 +92,13 @@ const SectionTask = styled.section`
     }
 `;
 
-const ContainerTask = styled.div`
+const TaskContainer = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
 `;
 
-const FirstSubContainerTask = styled.div`
+const InfoTask = styled.div`
     display: flex;
     gap: 1rem;
 
@@ -107,15 +111,15 @@ const Input = styled.input`
     width: 1.1rem;
 `;
 
-const ContainerTextsTask = styled.div`
+const TextTask = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
     gap: 0.2rem;
 `;
 
-const TitleTask = styled.h1`
-    color: ${color.textColor};
+const Title = styled.h2`
+    color: ${color.textPrimaryColor};
     font-size: 1.3rem;
     margin: 0;
 
@@ -140,8 +144,8 @@ const TitleTask = styled.h1`
     }
 `;
 
-const DescriptionTask = styled.h3`
-    color: ${color.textColorGray};
+const Description = styled.h3`
+    color: ${color.textSecondaryColor};
     font-size: 1.2rem;
     margin: 0;
 
@@ -166,7 +170,7 @@ const DescriptionTask = styled.h3`
     }
 `;
 
-const SecondSubContainerTask = styled.div`
+const TaskButtons = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -184,5 +188,5 @@ const SecondSubContainerTask = styled.div`
 const Button = styled.button`
     background: none;
     border: none;
-    color: ${color.textColor};
+    color: ${color.textPrimaryColor};
 `;

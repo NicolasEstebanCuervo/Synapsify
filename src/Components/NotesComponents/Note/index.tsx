@@ -13,40 +13,44 @@ export const Note = ({
     number: number;
     assignee: string | undefined;
 }) => {
-    const { noteDelete,onClickNote } = useContextFnc();
+    const { noteDelete, onClickNote } = useContextFnc();
 
     const handleDelete = () => {
         noteDelete(note.idNote);
     };
 
-    const  createNote = ()=>{
-        onClickNote(note)
-    }
+    const createNote = () => {
+        onClickNote(note);
+    };
 
     return (
-        <ContainerNote data-testid="note">
-            <ContainerIconAndTexts>
-                <ContainerIcon>
+        <Container data-testid="note">
+            <Subcontainer>
+                <IconContainer>
                     <LinkStyle to={`/Note/${note.idNote}`}>
                         <SheetIcon />
                     </LinkStyle>
-                </ContainerIcon>
-                <ContainerTextNote>
-                    <LinkStyle data-testid="title-note" onClick={createNote} to={`/Note/${note.idNote}`}>
-                        <TitleNote>{note.titleNote}</TitleNote>
+                </IconContainer>
+                <TextContainer>
+                    <LinkStyle
+                        data-testid="title-note"
+                        onClick={createNote}
+                        to={`/Note/${note.idNote}`}
+                    >
+                        <NoteTitle>{note.NoteTitle}</NoteTitle>
                     </LinkStyle>
-                    <SubtitleNote>
+                    <NoteText>
                         Task #{number} assigned to{" "}
                         {assignee ? assignee : "Unassigned"}
-                    </SubtitleNote>
-                </ContainerTextNote>
-            </ContainerIconAndTexts>
+                    </NoteText>
+                </TextContainer>
+            </Subcontainer>
             <Button onClick={handleDelete}>Delete</Button>
-        </ContainerNote>
+        </Container>
     );
 };
 
-const ContainerNote = styled.div`
+const Container = styled.div`
     display: flex;
     gap: 1rem;
     justify-content: space-between;
@@ -58,7 +62,7 @@ const ContainerNote = styled.div`
     }
 `;
 
-const ContainerIconAndTexts = styled.div`
+const Subcontainer = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -66,14 +70,13 @@ const ContainerIconAndTexts = styled.div`
     @media (max-width: 400px) {
         gap: 0.5rem;
     }
-
 `;
-const ContainerTextNote = styled.div`
+const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
 `;
 
-const ContainerIcon = styled.div`
+const IconContainer = styled.div`
     background: ${color.grayColor};
     padding: 0.5rem;
     border-radius: 0.5rem;
@@ -92,8 +95,8 @@ const LinkStyle = styled(Link)`
     }
 `;
 
-const TitleNote = styled.h1`
-    color: ${color.textColor};
+const NoteTitle = styled.h3`
+    color: ${color.textPrimaryColor};
     font-size: 1.3rem;
     margin: 0;
 
@@ -118,8 +121,8 @@ const TitleNote = styled.h1`
     }
 `;
 
-const SubtitleNote = styled.h3`
-    color: ${color.textColorGray};
+const NoteText = styled.h4`
+    color: ${color.textSecondaryColor};
     font-size: 0.9rem;
     margin: 0;
 
@@ -151,7 +154,7 @@ const Button = styled.button`
     font-size: 1rem;
     padding: 0.3rem 1.3rem;
     background: ${color.grayColor};
-    color: ${color.textColor};
+    color: ${color.textPrimaryColor};
 
     @media (max-width: 1000px) {
         font-size: 0.9rem;

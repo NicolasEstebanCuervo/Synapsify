@@ -4,14 +4,14 @@ import { Notes } from "../Notes";
 import styled from "@emotion/styled";
 import * as color from "../../../Theme";
 
-export const FormNote = () => {
-    const { titleNote, changeTitleNote, handleCreateNote, tickets } =
+export const FormNotes = () => {
+    const { NoteTitle, changeNoteTitle, handleCreateNote, tickets } =
         useContextFnc();
 
     const [assignee, setAssignee] = useState("");
 
     const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        changeTitleNote(e);
+        changeNoteTitle(e);
     };
 
     const onChangeAssigne = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -21,7 +21,7 @@ export const FormNote = () => {
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (!titleNote.trim()) {
+        if (!NoteTitle.trim()) {
             return;
         }
 
@@ -30,14 +30,14 @@ export const FormNote = () => {
     };
 
     return (
-        <SectionFormTickets>
-            <ContainerFormTickets>
-                <TitleFormTickets>Create a note</TitleFormTickets>
+        <Container>
+            <FormContainer>
+                <Title>Create a note</Title>
                 <Form action="" data-testid="note-form" onSubmit={handleSubmit}>
                     <Input
                         type="text"
                         onChange={onChangeTitle}
-                        value={titleNote}
+                        value={NoteTitle}
                         placeholder="Title"
                         maxLength={20}
                     />
@@ -51,21 +51,21 @@ export const FormNote = () => {
                         ))}
                     </Select>
 
-                    <ContainerNotes>
-                        <TextNote>Recent notes</TextNote>
+                    <NotesContainer>
+                        <NoteText>Recent notes</NoteText>
                         <Notes />
-                    </ContainerNotes>
+                    </NotesContainer>
 
                     <Button type="submit" data-testid="button-form-notes">
                         Create a note
                     </Button>
                 </Form>
-            </ContainerFormTickets>
-        </SectionFormTickets>
+            </FormContainer>
+        </Container>
     );
 };
 
-const SectionFormTickets = styled.div`
+const Container = styled.section`
     width: 80%;
     display: flex;
     justify-content: center;
@@ -83,7 +83,7 @@ const SectionFormTickets = styled.div`
     }
 `;
 
-const ContainerFormTickets = styled.div`
+const FormContainer = styled.div`
     width: 60%;
 
     @media (max-width: 1000px) {
@@ -95,8 +95,8 @@ const ContainerFormTickets = styled.div`
     }
 `;
 
-const TitleFormTickets = styled.h1`
-    color: ${color.textColor};
+const Title = styled.h1`
+    color: ${color.textPrimaryColor};
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
@@ -121,10 +121,10 @@ const Form = styled.form`
 const Input = styled.input`
     padding: 0.7rem 0.5rem;
     border-radius: 0.5rem;
-    background: ${color.placeHolderColor};
+    background: ${color.placeholderColor};
     border: none;
-    outline: 1px solid ${color.borderInputColor};
-    color: ${color.textColor};
+    outline: 1px solid ${color.inputBorderColor};
+    color: ${color.textPrimaryColor};
     font-size: 1.2rem;
 
     @media (max-width: 1000px) {
@@ -146,8 +146,8 @@ const Input = styled.input`
 `;
 
 const Select = styled.select`
-    background: ${color.placeHolderColor};
-    color: ${color.textColor};
+    background: ${color.placeholderColor};
+    color: ${color.textPrimaryColor};
     border-radius: 0.5rem;
     padding: 0.5rem;
 
@@ -169,8 +169,8 @@ const Select = styled.select`
     }
 `;
 
-const TextNote = styled.h1`
-    color: ${color.textColor};
+const NoteText = styled.h2`
+    color: ${color.textPrimaryColor};
     font-size: 1.5rem;
     font-weight: bold;
     text-align: left;
@@ -192,7 +192,7 @@ const TextNote = styled.h1`
     }
 `;
 
-const ContainerNotes = styled.div`
+const NotesContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -203,8 +203,8 @@ const Button = styled.button`
     border-radius: 0.5rem;
     border: none;
     padding: 0.7rem 0;
-    background: ${color.tertiaryColor};
-    color: ${color.textColor};
+    background: ${color.accentColor};
+    color: ${color.textPrimaryColor};
 
     @media (max-width: 1000px) {
         font-size: 1rem;

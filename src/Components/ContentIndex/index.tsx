@@ -4,18 +4,20 @@ import { Link } from "react-router-dom";
 
 export const ContentIndex = () => {
     return (
-        <MainContent>
-            <ContainerTitles>
-                <TitleIndex>Synapsify</TitleIndex>
-                <Slogan>Sail the tide of productivity with Sinapsify.</Slogan>
-            </ContainerTitles>
+        <Container>
+            <HeaderTitles>
+                <Title>Synapsify</Title>
+                <Subtitle>
+                    Sail the tide of productivity with Sinapsify.
+                </Subtitle>
+            </HeaderTitles>
 
-            <ContainerContent>
-                <ContainerTexsContent>
+            <IndividualContainer>
+                <TextContainer>
                     <TitleContent>
                         Get Things Done Together: Synapsify's Ticket Power!
                     </TitleContent>
-                    <DescriptionContent>
+                    <TextContent>
                         In Synapsify, tickets serve as the backbone of organized
                         teamwork. From creation to resolution, Synapsify
                         facilitates collaboration among team members to address
@@ -27,27 +29,24 @@ export const ContentIndex = () => {
                         communication, and swift and effective issue resolution.
                         Synapsify helps keep your team synchronized and focused
                         on achieving common goals.
-                    </DescriptionContent>
+                    </TextContent>
                     <Link to="Tickets">
                         <Button>Get Rolling!</Button>
                     </Link>
-                </ContainerTexsContent>
-                <Illustration
-                    src={require("../../Assets/Illustrations/Tickets.png")}
+                </TextContainer>
+                <Image
+                    src={require("../../Assets/Images/Tickets.png")}
                     alt=""
                 />
-            </ContainerContent>
+            </IndividualContainer>
 
-            <ContainerContent>
-                <Illustration
-                    src={require("../../Assets/Illustrations/Tasks.png")}
-                    alt=""
-                />
-                <ContainerTexsContent>
+            <IndividualContainer>
+                <Image src={require("../../Assets/Images/Tasks.png")} alt="" />
+                <TextContainer>
                     <TitleContent>
                         Stay on Top: Conquer Tasks with Synapsify!
                     </TitleContent>
-                    <DescriptionContent>
+                    <TextContent>
                         The task list feature in Synapsify is your ally for
                         organizing and completing your daily activities
                         effectively. With Synapsify, you can create customized
@@ -56,20 +55,20 @@ export const ContentIndex = () => {
                         From complex projects to simple pending tasks, Synapsify
                         helps you maintain focus and productivity by offering a
                         clear view of what needs to be done and when.
-                    </DescriptionContent>
+                    </TextContent>
                     <Link to="/Tickets">
                         <Button>Make It Happen!</Button>
                     </Link>
-                </ContainerTexsContent>
-            </ContainerContent>
+                </TextContainer>
+            </IndividualContainer>
 
-            <ContainerContent>
-                <ContainerTexsContent>
+            <IndividualContainer>
+                <TextContainer>
                     <TitleContent>
                         Brainstorms to Brilliance: Synapsify's Note-taking
                         Magic!
                     </TitleContent>
-                    <DescriptionContent>
+                    <TextContent>
                         In Synapsify, taking notes is key to capturing ideas,
                         reminders, and any information relevant to your projects
                         and tasks. With Synapsify, you can quickly create notes,
@@ -80,21 +79,18 @@ export const ContentIndex = () => {
                         organized and accessible. Additionally, you can share
                         your notes with colleagues or collaborators for better
                         team collaboration and communication.
-                    </DescriptionContent>
+                    </TextContent>
                     <Link to="/Notes">
                         <Button>Write Your Story!</Button>
                     </Link>
-                </ContainerTexsContent>
-                <Illustration
-                    src={require("../../Assets/Illustrations/Notes.png")}
-                    alt=""
-                />
-            </ContainerContent>
-        </MainContent>
+                </TextContainer>
+                <Image src={require("../../Assets/Images/Notes.png")} alt="" />
+            </IndividualContainer>
+        </Container>
     );
 };
 
-const MainContent = styled.div`
+const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,7 +99,7 @@ const MainContent = styled.div`
     padding-bottom: 5rem;
 `;
 
-const ContainerTitles = styled.div`
+const HeaderTitles = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,8 +112,8 @@ const ContainerTitles = styled.div`
     }
 `;
 
-const TitleIndex = styled.h1`
-    color: ${color.textColor};
+const Title = styled.h1`
+    color: ${color.textPrimaryColor};
     font-size: 4rem;
     font-weight: bold;
     text-align: left;
@@ -136,8 +132,8 @@ const TitleIndex = styled.h1`
     }
 `;
 
-const Slogan = styled.h3`
-    color: ${color.textColorGray};
+const Subtitle = styled.h2`
+    color: ${color.textSecondaryColor};
     font-size: 2rem;
     text-align: center;
 
@@ -155,7 +151,7 @@ const Slogan = styled.h3`
     }
 `;
 
-const ContainerContent = styled.div`
+const IndividualContainer = styled.section`
     width: 70%;
     display: flex;
     align-items: center;
@@ -183,7 +179,7 @@ const ContainerContent = styled.div`
     }
 `;
 
-const ContainerTexsContent = styled.div`
+const TextContainer = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -206,8 +202,8 @@ const ContainerTexsContent = styled.div`
     }
 `;
 
-const TitleContent = styled.h1`
-    color: ${color.textColor};
+const TitleContent = styled.h3`
+    color: ${color.textPrimaryColor};
     font-size: 2rem;
 
     @media (max-width: 1000px) {
@@ -227,8 +223,8 @@ const TitleContent = styled.h1`
     }
 `;
 
-const DescriptionContent = styled.p`
-    color: ${color.textColorGray};
+const TextContent = styled.p`
+    color: ${color.textSecondaryColor};
     font-size: 1rem;
 
     @media (max-width: 1000px) {
@@ -252,7 +248,7 @@ const DescriptionContent = styled.p`
     }
 `;
 
-const Illustration = styled.img`
+const Image = styled.img`
     width: 100%;
     max-width: 35rem;
 
@@ -274,8 +270,8 @@ const Button = styled.button`
     border-radius: 0.5rem;
     border: none;
     padding: 0.7rem 0;
-    background: ${color.tertiaryColor};
-    color: ${color.textColor};
+    background: ${color.accentColor};
+    color: ${color.textPrimaryColor};
 
     @media (max-width: 1000px) {
         font-size: 1rem;

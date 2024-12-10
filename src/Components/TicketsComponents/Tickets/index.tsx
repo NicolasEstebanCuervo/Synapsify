@@ -11,11 +11,11 @@ export const Tickets = ({ idFilter }: { idFilter?: string | undefined }) => {
         : tickets;
 
     return (
-        <SectionTickets data-testid="tickets">
+        <Container data-testid="tickets">
             {!idFilter && (
-                <div>
-                    <TitleTicketsList>Tickets</TitleTicketsList>
-                    <SubtitleTicketsList>Last tickets</SubtitleTicketsList>
+                <section>
+                    <Title>Tickets</Title>
+                    <SubTitle>Last tickets</SubTitle>
                     <UnorderedList>
                         {tickets.map((ticket) => (
                             <ListItem key={ticket.idTicket}>
@@ -23,37 +23,33 @@ export const Tickets = ({ idFilter }: { idFilter?: string | undefined }) => {
                             </ListItem>
                         ))}
                     </UnorderedList>
-                </div>
+                </section>
             )}
 
             <div>
                 {!idFilter && <TitleToDo>Your tickets</TitleToDo>}
 
-                <ContainerTickets edit={!idFilter}>
-                    <TableTickets>
-                        {!idFilter && (
-                            <TitlesTable>
-                                <tr>
-                                    <th>Tickets</th>
-                                    <th>Assignee</th>
-                                    <th>Priority</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </TitlesTable>
-                        )}
-                        <TableBody>
-                            {ticketToShow.map((ticket) => (
-                                <Ticket key={ticket.idTicket} ticket={ticket} />
-                            ))}
-                        </TableBody>
-                    </TableTickets>
-                </ContainerTickets>
+                <TicketsContainer edit={!idFilter}>
+                    {!idFilter && (
+                        <TitlesTable>
+                            <h4>Tickets</h4>
+                            <h4>Assignee</h4>
+                            <h4>Priority</h4>
+                            <h4>Edit</h4>
+                        </TitlesTable>
+                    )}
+                    <ContainerTicket>
+                        {ticketToShow.map((ticket) => (
+                            <Ticket key={ticket.idTicket} ticket={ticket} />
+                        ))}
+                    </ContainerTicket>
+                </TicketsContainer>
             </div>
-        </SectionTickets>
+        </Container>
     );
 };
 
-const SectionTickets = styled.section`
+const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -78,8 +74,8 @@ const SectionTickets = styled.section`
     }
 `;
 
-const TitleTicketsList = styled.h1`
-    color: ${color.textColor};
+const Title = styled.h1`
+    color: ${color.textPrimaryColor};
     font-size: 2.5rem;
     font-weight: bold;
 
@@ -100,8 +96,8 @@ const TitleTicketsList = styled.h1`
     }
 `;
 
-const SubtitleTicketsList = styled.h3`
-    color: ${color.textColorGray};
+const SubTitle = styled.h2`
+    color: ${color.textSecondaryColor};
     font-size: 1.2rem;
 
     @media (max-width: 1000px) {
@@ -130,7 +126,7 @@ const ListItem = styled.li`
     position: relative;
     padding-left: 1rem;
     list-style-type: none;
-    color: ${color.textColor};
+    color: ${color.textPrimaryColor};
     margin: 1rem 0;
 
     &:before {
@@ -179,8 +175,8 @@ const ListItem = styled.li`
     }
 `;
 
-const TitleToDo = styled.h1`
-    color: ${color.textColor};
+const TitleToDo = styled.h3`
+    color: ${color.textPrimaryColor};
     font-size: 1.5rem;
 
     @media (max-width: 1000px) {
@@ -200,61 +196,54 @@ const TitleToDo = styled.h1`
     }
 `;
 
-const ContainerTickets = styled.div`
+const TicketsContainer = styled.section`
     border: ${({ edit }: { edit: boolean }) =>
-        edit ? ` 2px solid ${color.placeHolderColor}` : ""};
+        edit ? ` 2px solid ${color.placeholderColor}` : ""};
     width: 100%;
     border-radius: 0.5rem;
 `;
 
-const TableTickets = styled.table`
-    width: 100%;
-    border-radius: 0.5rem;
-`;
-
-const TitlesTable = styled.thead`
+const TitlesTable = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     text-align: center;
-    background: ${color.backgroundTableTitles};
+    background: ${color.tableHeaderBackground};
     width: 100%;
+    h4 {
+        padding: 0.5rem 1rem;
+        font-size: 1.1rem;
+        color: ${color.textPrimaryColor};
+        font-weight: 400;
 
-    tr {
-        border-radius: 0.5rem;
-
-        th {
-            padding: 0.5rem 0;
-            font-size: 1.1rem;
-            color: ${color.textColor};
-            font-weight: 400;
-
-            @media (max-width: 700px) {
-                :nth-of-type(1) {
-                    width: 100%;
-                }
-
-                :nth-of-type(2) {
-                    display: none;
-                }
-
-                :nth-of-type(3) {
-                    display: none;
-                }
-
-                :nth-of-type(4) {
-                    display: none;
-                }
+        @media (max-width: 700px) {
+            :nth-of-type(1) {
+                width: 100%;
             }
 
-            @media (max-width: 400px) {
-                font-size: 5vw;
+            :nth-of-type(2) {
+                display: none;
             }
 
-            @media (max-width: 250px) {
-                font-size: 7vw;
+            :nth-of-type(3) {
+                display: none;
             }
+
+            :nth-of-type(4) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 400px) {
+            font-size: 5vw;
+        }
+
+        @media (max-width: 250px) {
+            font-size: 7vw;
         }
     }
 `;
 
-const TableBody = styled.tbody`
+const ContainerTicket = styled.div`
     text-align: center;
+    width: 100%;
 `;

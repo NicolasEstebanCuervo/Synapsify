@@ -8,7 +8,7 @@ import { useContextFnc } from "../../../Context";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
 
-export const NoteAlone = () => {
+export const NoteItem = () => {
     const { id } = useParams();
     const { note } = useContextFnc();
     const editorInstance = useRef<EditorJS | null>(null);
@@ -26,7 +26,9 @@ export const NoteAlone = () => {
                 Object.assign(note, outputData);
                 localStorage.setItem("note", JSON.stringify(note));
             })
-            .catch((error) => {});
+            .catch((e) => {
+                console.log(e)
+            });
     };
 
     useEffect(() => {
@@ -68,7 +70,7 @@ export const NoteAlone = () => {
                 });
         }
     }, [content]);
-    
+
     useEffect(() => {
         const storedData = JSON.parse(
             window.localStorage.getItem("note") || "{}"
@@ -82,22 +84,22 @@ export const NoteAlone = () => {
     }, [id]);
 
     return (
-        <SectionNote data-testid="note-alone">
-            <ContainerTexts>
-                <TitleNote>{note?.titleNote}</TitleNote>
-                <AssigneeNote>
-                    {note?.assigneeNote
-                        ? `${note?.assigneeNote}`
+        <Container data-testid="note-alone">
+            <TextContainer>
+                <NoteTitle>{note?.NoteTitle}</NoteTitle>
+                <NoteAssignee>
+                    {note?.NoteAssignee
+                        ? `${note?.NoteAssignee}`
                         : "Unassigned"}
-                </AssigneeNote>
-            </ContainerTexts>
+                </NoteAssignee>
+            </TextContainer>
             <OptionColors>
                 <TextArea id="editor" ref={editorRef}></TextArea>
             </OptionColors>
-        </SectionNote>
+        </Container>
     );
 };
-const SectionNote = styled.section`
+const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -106,29 +108,29 @@ const SectionNote = styled.section`
     gap: 2rem;
 `;
 
-const ContainerTexts = styled.div``;
+const TextContainer = styled.div``;
 
-const TitleNote = styled.h1`
-    color: ${color.textColor};
+const NoteTitle = styled.h1`
+    color: ${color.textPrimaryColor};
     font-size: 4rem;
     font-weight: bold;
     text-align: left;
 `;
 
-const AssigneeNote = styled.h3`
+const NoteAssignee = styled.h3`
     display: inline;
     width: auto;
     background: ${color.grayColor};
     padding: 0.2rem 1rem;
     border-radius: 0.5rem;
     font-size: 1rem;
-    color: ${color.textColor};
+    color: ${color.textPrimaryColor};
 `;
 
 const OptionColors = styled.div`
     .ce-toolbar__plus svg,
     .ce-toolbar__settings-btn svg {
-        color: ${color.textColor};
+        color: ${color.textPrimaryColor};
         :hover {
             color: ${color.primaryColor};
         }
@@ -168,7 +170,7 @@ const OptionColors = styled.div`
 const TextArea = styled.div`
     min-width: 80%;
     min-height: 100vh;
-    color: ${color.textColorGray};
+    color: ${color.textSecondaryColor};
     :focus-visible {
         outline: none;
     }

@@ -8,7 +8,14 @@ import EditIcon from "../../../Assets/Icons/EditIcon";
 import { FormTickets } from "../FormTickets";
 
 export const Ticket = ({ ticket }: { ticket: ITicket }) => {
-    const { onClickTicket, ticketDelete, getIdTicket,setTitleTicket,setAssigneeTicket,setPriorityTicket } = useContextFnc();
+    const {
+        onClickTicket,
+        ticketDelete,
+        getIdTicket,
+        setTitle,
+        setAssigneeTicket,
+        setPriorityTicket,
+    } = useContextFnc();
     const [edit, setEdit] = useState(false);
 
     const createTicketPage = () => {
@@ -23,13 +30,13 @@ export const Ticket = ({ ticket }: { ticket: ITicket }) => {
         setEdit(!edit);
         getIdTicket(ticket.idTicket);
 
-        setTitleTicket(ticket.titleTicket) 
-        setAssigneeTicket(ticket.assigneeTicket)
-        setPriorityTicket(ticket.priorityTicket)
+        setTitle(ticket.titleTicket);
+        setAssigneeTicket(ticket.assigneeTicket);
+        setPriorityTicket(ticket.priorityTicket);
     };
 
     return (
-        <TableRow edit={!edit}>
+        <Container edit={!edit}>
             {edit ? (
                 <>
                     <FormTickets
@@ -42,58 +49,71 @@ export const Ticket = ({ ticket }: { ticket: ITicket }) => {
                 </>
             ) : (
                 <>
-                    <TableCell>
+                    <RowContainer>
                         {" "}
-                        <LinkTableCell
+                        <LinkRowContainer
                             to={`/Ticket/${ticket.idTicket}`}
                             onClick={createTicketPage}
-                            data-testid="ticket-title">
+                            data-testid="ticket-title"
+                        >
                             <Label>Title:</Label>
 
                             {ticket.titleTicket}
-                        </LinkTableCell>
-                    </TableCell>
-                    <TableCell>
+                        </LinkRowContainer>
+                    </RowContainer>
+                    <RowContainer>
                         <Label>Assignee:</Label>
 
                         {ticket.assigneeTicket}
-                    </TableCell>
-                    <TableCell>
+                    </RowContainer>
+                    <RowContainer>
                         <ContainerPriority>
                             <LabelPriority>Priority:</LabelPriority>
                             {ticket.priorityTicket}
                         </ContainerPriority>
-                    </TableCell>
-                    <TableCell>
+                    </RowContainer>
+                    <RowContainer>
                         <Button>
-                            <EditIcon data-testid="edit-button" onClick={handleEditar} />
+                            <EditIcon
+                                data-testid="edit-button"
+                                onClick={handleEditar}
+                            />
                         </Button>
                         <Button>
-                            <ExitIcon data-testid="delete-button" onClick={onDeleteTicket} />
+                            <ExitIcon
+                                data-testid="delete-button"
+                                onClick={onDeleteTicket}
+                            />
                         </Button>
-                    </TableCell>
+                    </RowContainer>
                 </>
             )}
-        </TableRow>
+        </Container>
     );
 };
 
-const TableRow = styled.tr`
+const Container = styled.div`
     text-align: center;
+    display: grid;
+
+    grid-template-columns: ${({ edit }: { edit: boolean }) =>
+        edit ? `repeat(4, 1fr)` : ``};
 
     border-top: ${({ edit }: { edit: boolean }) =>
-        edit ? `1px solid ${color.borderTicket}` : ``};
+        edit ? `1px solid ${color.ticketBorderColor}` : ``};
 
     border-bottom: ${({ edit }: { edit: boolean }) =>
-        edit ? `1px solid ${color.borderTicket}` : ``};
+        edit ? `1px solid ${color.ticketBorderColor}` : ``};
 
     &:last-child {
         border-bottom: 0px;
     }
 
     @media (max-width: 700px) {
+        display: flex;
+        flex-direction: column;
         position: relative;
-        height: 5rem;
+        width: 100%;
     }
 
     @media (max-width: 400px) {
@@ -120,18 +140,18 @@ const Label = styled.label`
     }
 `;
 
-const TableCell = styled.td`
+const RowContainer = styled.div`
     font-size: 1rem;
     padding: 1rem 0;
-    color: ${color.textColorGray};
+    color: ${color.textSecondaryColor};
     text-transform: capitalize;
 
     :nth-of-type(1) {
-        color: ${color.textColor};
+        color: ${color.textPrimaryColor};
     }
 
     :nth-of-type(3) {
-        color: ${color.textColor};
+        color: ${color.textPrimaryColor};
     }
 
     @media (max-width: 1000px) {
@@ -202,7 +222,6 @@ const LabelPriority = styled.label`
 `;
 
 const ContainerPriority = styled.div`
-    display: inline-block;
     background: ${color.grayColor};
     padding: 0.4rem 1rem;
     border-radius: 0.5rem;
@@ -213,7 +232,7 @@ const ContainerPriority = styled.div`
     }
 `;
 
-const LinkTableCell = styled(Link)`
+const LinkRowContainer = styled(Link)`
     padding: 1rem 0;
     text-decoration: none;
     color: inherit;
@@ -227,7 +246,7 @@ const LinkTableCell = styled(Link)`
         font-size: 1rem;
         padding: 0;
         width: 90%;
-        word-wrap: break-word; 
+        word-wrap: break-word;
     }
 
     @media (max-width: 400px) {

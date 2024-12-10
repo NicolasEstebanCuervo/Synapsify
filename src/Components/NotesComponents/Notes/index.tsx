@@ -5,21 +5,21 @@ import { Note } from "../Note";
 export const Notes = () => {
     const { notes } = useContextFnc();
     return (
-        <ContainerNotes data-testid="notes">
+        <Container data-testid="notes">
             {notes.map((note, index) => (
-                <ContainerNote key={index}>
+                <NoteContainer key={index}>
                     <Note
-                        assignee={note.assigneeNote}
+                        assignee={note.NoteAssignee}
                         note={note}
                         number={index + 1}
                     />
-                </ContainerNote>
+                </NoteContainer>
             ))}
-        </ContainerNotes>
+        </Container>
     );
 };
 
-const ContainerNotes = styled.div`
+const Container = styled.section`
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -36,6 +36,6 @@ const ContainerNotes = styled.div`
     }
 `;
 
-const ContainerNote = styled.div`
+const NoteContainer = styled.div`
     width: 100%;
 `;
