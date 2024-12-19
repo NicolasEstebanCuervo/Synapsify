@@ -26,7 +26,7 @@ export const TicketWithTasks = ({ ticket }: { ticket: ITicket | any }) => {
 
     if (!ticketData) {
         return (
-            <div data-testid="ticket-with-task">
+            <div>
                 No ticket data found in localStorage.
             </div>
         );
@@ -50,8 +50,8 @@ export const TicketWithTasks = ({ ticket }: { ticket: ITicket | any }) => {
                                 <Subtitle>{ticketData.priorityTicket}</Subtitle>
                             </TicketDetails>
                             <AddIcon
-                                data-testid="add-icon-cypress"
                                 onClick={toggleHidden}
+                                data-testid="add-icon"
                             >
                                 +
                             </AddIcon>

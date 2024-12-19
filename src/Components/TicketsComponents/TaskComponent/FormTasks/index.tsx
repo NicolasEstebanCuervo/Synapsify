@@ -102,7 +102,7 @@ export const FormTasks = ({
                             </>
                         ) : (
                             <>
-                                <Button type="submit">Create a task</Button>
+                                <Button data-testid="create-task-button" type="submit">Create a task</Button>
                             </>
                         ))}
                 </Form>

@@ -22,10 +22,10 @@ export interface ITicket {
 // Interface Task
 
 export interface ITask {
+    idTicket: string;
     idTask: string;
     titleTask: string;
     descriptionTask: string;
-    idTicket: string;
 }
 
 // Interface Note

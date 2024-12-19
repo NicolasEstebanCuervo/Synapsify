@@ -46,16 +46,17 @@ export const Task = ({ task }: { task: ITask }) => {
                         ticketId=""
                         task={task}
                         setEdit={setEdit}
+                        edit={edit}
                     />
                 </>
             ) : (
-                <TaskContainer data-testid="task">
+                <TaskContainer>
                     <InfoTask>
                         <Input
                             type="checkbox"
                             checked={isChecked}
                             onChange={handleCheckboxChange}
-                            data-testid="check-box-cypress"
+                            data-testid="check-box"
                         />
                         <TextTask>
                             <Title>{task.titleTask}</Title>
@@ -65,13 +66,13 @@ export const Task = ({ task }: { task: ITask }) => {
                     <TaskButtons>
                         <Button>
                             <EditIcon
-                                data-testid="edit-icon"
+                                data-testid="edit-button"
                                 onClick={handleEdit}
                             ></EditIcon>
                         </Button>
                         <Button>
                             <ExitIcon
-                                data-testid="exit-icon"
+                                data-testid="delete-button"
                                 onClick={taskDeleteFnc}
                             ></ExitIcon>
                         </Button>
