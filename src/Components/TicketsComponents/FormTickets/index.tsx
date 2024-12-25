@@ -1,23 +1,10 @@
 import { ChangeEvent } from "react";
-import { ITicket, useContextFnc } from "../../../Context";
+import { useContextFnc } from "../../../Context";
 import styled from "@emotion/styled";
 import * as color from "../../../Theme";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-interface FormTicketsProps {
-    ticket?: ITicket;
-    setEdit?: React.Dispatch<React.SetStateAction<boolean>>;
-    edit?: boolean;
-    title: string;
-    subtitle: string;
-}
-
-export const FormTickets = ({
-    ticket,
-    setEdit,
-    edit,
-    title,
-    subtitle,
-}: FormTicketsProps) => {
+export const FormTickets = () => {
     const {
         titleTicket,
         assigneeTicket,
@@ -27,13 +14,15 @@ export const FormTickets = ({
         changePriorityTicket,
         handleSubmitTicket,
         updateTicket,
-        getIdTicket,
-        toggleNewTicket,
     } = useContextFnc();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const isEdit = location.state?.isEdit;
+    const ticket = location.state?.ticket;
 
     const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         changeTitle(e);
-        console.log(e.target.value)
     };
 
     const onChangeAssignee = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,10 +33,6 @@ export const FormTickets = ({
         changePriorityTicket(e);
     };
 
-    const toggleNewTicketFnc = () => {
-        toggleNewTicket();
-    };
-
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (ticket) {
@@ -55,17 +40,21 @@ export const FormTickets = ({
         } else {
             handleSubmitTicket();
         }
-        if (setEdit) {
-            setEdit(false);
-        }
-        getIdTicket("");
+        navigate("/tickets");
     };
-
     return (
         <Container>
             <FormContainer>
-                <Title>{title}</Title>
-                <Subtitle>{subtitle}</Subtitle>
+                {!isEdit ? (
+                    <Title>Create a ticket</Title>
+                ) : (
+                    <Title>Edit ticket</Title>
+                )}
+                {!isEdit ? (
+                    <Subtitle>Create a ticket for your project.</Subtitle>
+                ) : (
+                    <Subtitle>Edit the ticket for your project.</Subtitle>
+                )}
                 <Form action="" onSubmit={handleSubmit}>
                     <Input
                         type="text"
@@ -96,16 +85,16 @@ export const FormTickets = ({
                                 data-testid="create-ticket-button"
                                 type="submit"
                             >
-                                {edit ? "Edit ticket" : "Create ticket"}
+                                {isEdit ? "Edit ticket" : "Create ticket"}
                             </Button>
                         )}
 
-                    {edit ? (
+                    {isEdit ? (
                         <></>
                     ) : (
-                        <Button onClick={toggleNewTicketFnc}>
-                            Return to tickets
-                        </Button>
+                        <Link to="/tickets">
+                            <Button>Return to tickets</Button>
+                        </Link>
                     )}
                 </Form>
             </FormContainer>

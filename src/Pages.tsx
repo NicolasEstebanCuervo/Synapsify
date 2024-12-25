@@ -9,33 +9,27 @@ import { ContentIndex } from "./Components/ContentIndex";
 import { TicketWithTasks } from "./Components/TicketsComponents/TicketWithTasks";
 import { FormNotes } from "./Components/NotesComponents/FormNotes";
 import { NoteItem } from "./Components/NotesComponents/NoteItem";
+import { FormTasks } from "./Components/TicketsComponents/TaskComponent/FormTasks";
 
 export const IndexPage = () => {
     return <ContentIndex />;
 };
 
 export const TicketsPage = () => {
-    const { tickets, newTicket, idTicket } = useContextFnc();
+    return <Tickets />;
+};
 
-    return (
-        <>
-            {tickets.length === 0 || newTicket ? (
-                <FormTickets
-                    title="Create ticket"
-                    subtitle="Create a ticket for your project."
-                />
-            ) : (
-                <>
-                    <Tickets idFilter={idTicket} />
-                </>
-            )}
-        </>
-    );
+export const TicketFormPage = () => {
+    return <FormTickets />;
 };
 
 export const TicketPage = () => {
     const { ticket } = useContextFnc();
     return <TicketWithTasks ticket={ticket} />;
+};
+
+export const TaskFormPage = () => {
+    return <FormTasks/>;
 };
 
 export const NotesPage = () => {

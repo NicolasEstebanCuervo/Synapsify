@@ -1,15 +1,14 @@
-import { ITicket, useContextFnc } from "../../../Context";
+import { ITicket } from "../../../Context";
 import styled from "@emotion/styled";
-import { FormTasks } from "../TaskComponent/FormTasks";
 import { Tasks } from "../TaskComponent/Tasks";
 import * as color from "../../../Theme";
 import AddIcon from "../../../Assets/Icons/AddIcon";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const TicketWithTasks = ({ ticket }: { ticket: ITicket | any }) => {
     const [loaded, setLoaded] = useState(false);
     const [ticketData, setTicketData] = useState<ITicket | null>(null);
-    const { toggleHiddenTicket, hiddenTickets } = useContextFnc();
 
     useEffect(() => {
         const savedTicketJSON = localStorage.getItem("ticket");
@@ -25,49 +24,25 @@ export const TicketWithTasks = ({ ticket }: { ticket: ITicket | any }) => {
     }
 
     if (!ticketData) {
-        return (
-            <div>
-                No ticket data found in localStorage.
-            </div>
-        );
+        return <div>No ticket data found in localStorage.</div>;
     }
-
-    const isTicketHidden = hiddenTickets.includes(ticketData.idTicket);
-
-    const toggleHidden = () => {
-        toggleHiddenTicket(ticketData.idTicket);
-    };
 
     return (
         <Container>
-            {!isTicketHidden ? (
-                <>
-                    <InfoTicket>
-                        <Title>{ticketData.titleTicket}</Title>
-                        <ContainerSubtitles>
-                            <TicketDetails>
-                                <Subtitle>{ticketData.assigneeTicket}</Subtitle>
-                                <Subtitle>{ticketData.priorityTicket}</Subtitle>
-                            </TicketDetails>
-                            <AddIcon
-                                onClick={toggleHidden}
-                                data-testid="add-icon"
-                            >
-                                +
-                            </AddIcon>
-                        </ContainerSubtitles>
-                    </InfoTicket>
+            <>
+                <InfoTicket>
+                    <Title>{ticketData.titleTicket}</Title>
+                    <ContainerSubtitles>
+                        <TicketDetails>
+                            <Subtitle>{ticketData.assigneeTicket}</Subtitle>
+                            <Subtitle>{ticketData.priorityTicket}</Subtitle>
+                        </TicketDetails>
+                        <Link to="/task/form"><AddIcon data-testid="add-icon">+</AddIcon></Link>
+                    </ContainerSubtitles>
+                </InfoTicket>
 
-                    <Tasks ticketId={ticket.idTicket} />
-                </>
-            ) : (
-                <>
-                    <FormTasks
-                        text="Create a task"
-                        ticketId={ticket.idTicket}
-                    />
-                </>
-            )}
+                <Tasks ticketId={ticket.idTicket} />
+            </>
         </Container>
     );
 };

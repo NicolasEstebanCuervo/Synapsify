@@ -12,6 +12,7 @@ export const ContentIndex = () => {
                 </Subtitle>
             </HeaderTitles>
 
+            <SubContainer>
             <IndividualContainer>
                 <TextContainer>
                     <TitleContent>
@@ -86,6 +87,7 @@ export const ContentIndex = () => {
                 </TextContainer>
                 <Image src={require("../../Assets/Images/Notes.png")} alt="" />
             </IndividualContainer>
+            </SubContainer>
         </Container>
     );
 };
@@ -97,6 +99,14 @@ const Container = styled.div`
     flex-direction: column;
     gap: 2rem;
     padding-bottom: 5rem;
+    max-width: 1300px;
+`;
+
+const SubContainer = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5rem;
 `;
 
 const HeaderTitles = styled.section`
@@ -152,10 +162,11 @@ const Subtitle = styled.h2`
 `;
 
 const IndividualContainer = styled.section`
-    width: 70%;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 2rem;
 
     @media (max-width: 1500px) {
         width: 80%;
@@ -183,7 +194,7 @@ const TextContainer = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 50%;
+    width: 60%;
 
     @media (max-width: 1000px) {
         width: 80%;
@@ -250,14 +261,16 @@ const TextContent = styled.p`
 
 const Image = styled.img`
     width: 100%;
-    max-width: 35rem;
+    max-width: 25rem;
+    background: #fffefe;
+    border-radius: 10px;
 
     @media (max-width: 1300px) {
-        max-width: 30rem;
+        max-width: 25rem;
     }
 
     @media (max-width: 1200px) {
-        max-width: 25rem;
+        max-width: 20rem;
     }
 
     @media (max-width: 1000px) {

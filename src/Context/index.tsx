@@ -37,14 +37,7 @@ export interface INote {
 }
 
 interface IContextProps {
-    // Global props.
-    hiddenTickets: string[];
-    toggleHiddenTicket: (ticketId: string) => void;
-    newTicket: boolean;
-    toggleNewTicket: () => void;
     // Tickets props.
-    idTicket: string;
-    getIdTicket: (id: string) => void;
     ticket: ITicket | undefined;
     onClickTicket: (ticket: ITicket) => void;
     tickets: ITicket[];
@@ -58,7 +51,7 @@ interface IContextProps {
     changeAssigneeTicket: (e: ChangeEvent<HTMLInputElement>) => void;
     changePriorityTicket: (e: ChangeEvent<HTMLInputElement>) => void;
     handleSubmitTicket: () => void;
-    ticketDelete: (id: string) => void;
+    ticketDelete: (ticket: ITicket) => void;
     updateTicket: (id: string) => void;
     editTicket: (ticket: ITicket) => void;
     // Task props.
@@ -90,31 +83,52 @@ export default function ContextAppComponent({
 }: {
     children: ReactNode;
 }) {
-    const [hiddenTickets, setHiddenTickets] = useState<string[]>([]);
-    const [newTicket, setNewTicket] = useState(false);
+    // Values for default
 
-    const toggleHiddenTicket = (ticketId: string) => {
-        setHiddenTickets((prevHiddenTickets) => {
-            if (prevHiddenTickets.includes(ticketId)) {
-                return prevHiddenTickets.filter((id) => id !== ticketId);
-            } else {
-                return [...prevHiddenTickets, ticketId];
-            }
+    const createDefaultTasks = (id: string) => {
+        const defaultTask: ITask[] = [
+            {
+                idTask: "asd",
+                idTicket: id,
+                titleTask: "Investigate Root Cause",
+                descriptionTask:
+                    "Analyze server logs, error messages, and infrastructure components to identify why the website is down.",
+            },
+            {
+                idTask: "qasda",
+                idTicket: id,
+                titleTask: "Restore Web Services",
+                descriptionTask:
+                    "Bring the website back online by restarting services, checking configurations, and verifying connectivity.",
+            },
+            {
+                idTask: "zxcz",
+                idTicket: id,
+                titleTask: "Notify Stakeholders",
+                descriptionTask:
+                    "Inform internal teams, stakeholders, and customers about the outage and expected resolution time.",
+            },
+            {
+                idTask: "asdeasf",
+                idTicket: id,
+                titleTask: "Website Unavailable: Urgent Fix Needed",
+                descriptionTask: "High",
+            },
+            {
+                idTask: "vcbjgfg",
+                idTicket: id,
+                titleTask: "User Profile Display Issue",
+                descriptionTask:
+                    "User profiles are not rendering correctly on the homepage.",
+            },
+        ];
+
+        setTasks((prevTasks) => {
+            const updatedTasks = [...prevTasks, ...defaultTask];
+            localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+            return updatedTasks;
         });
     };
-
-    const toggleNewTicket = () => {
-        setNewTicket(!newTicket);
-    };
-
-    // Funtions for the tickets
-
-    const [ticket, setTicket] = useState<ITicket>();
-    const [titleTicket, setTitle] = useState("");
-    const [assigneeTicket, setAssigneeTicket] = useState("");
-    const [priorityTicket, setPriorityTicket] = useState("");
-    const [tickets, setTickets] = useState<ITicket[]>([]);
-    const [idTicket, setIdTicket] = useState("");
 
     useEffect(() => {
         const defaultTickets: ITicket[] = [
@@ -146,7 +160,19 @@ export default function ContextAppComponent({
             },
         ];
         setNotes(defaultNotes);
+
+        createDefaultTasks("ajsn1kasd");
+        createDefaultTasks("wzxco1sd");
     }, []);
+
+    // Funtions for the tickets
+
+    const [ticket, setTicket] = useState<ITicket>();
+    const [titleTicket, setTitle] = useState("");
+    const [assigneeTicket, setAssigneeTicket] = useState("");
+    const [priorityTicket, setPriorityTicket] = useState("");
+    const [tickets, setTickets] = useState<ITicket[]>([]);
+    const [idTicket, setIdTicket] = useState("");
 
     const onClickTicket = (ticket: ITicket) => {
         setTicket(ticket);
@@ -165,19 +191,16 @@ export default function ContextAppComponent({
         setPriorityTicket(e.target.value);
     };
 
-    const getIdTicket = (idTicket: string) => {
-        setIdTicket(idTicket);
-    };
-
     const handleSubmitTicket = () => {
-        if (newTicket) {
-            setTitle("");
-            setAssigneeTicket("");
-            setPriorityTicket("");
-            setNewTicket(false);
-        }
+        setTitle("");
+        setAssigneeTicket("");
+        setPriorityTicket("");
 
-        if (!titleTicket.trim() || !assigneeTicket.trim() || !priorityTicket.trim()) {
+        if (
+            !titleTicket.trim() ||
+            !assigneeTicket.trim() ||
+            !priorityTicket.trim()
+        ) {
             return;
         }
         const ticketNew: ITicket = {
@@ -186,11 +209,12 @@ export default function ContextAppComponent({
             assigneeTicket: assigneeTicket,
             priorityTicket: priorityTicket,
         };
+
         createTicket(ticketNew);
         setTitle("");
         setAssigneeTicket("");
         setPriorityTicket("");
-        setNewTicket(false);
+        createDefaultTasks(ticketNew?.idTicket);
     };
 
     const createTicket = (ticket: ITicket) => {
@@ -234,19 +258,28 @@ export default function ContextAppComponent({
             }
         });
         setTickets(updatedTickets);
+        localStorage.setItem("tickets", JSON.stringify(updatedTickets));
+
         setTitle("");
         setAssigneeTicket("");
         setPriorityTicket("");
     };
 
-    const ticketDelete = (idTicket: string) => {
-        setTickets((prevTicket) =>
-            prevTicket.filter((ticket) => ticket.idTicket !== idTicket)
+    const ticketDelete = (ticketToDelete: ITicket) => {
+        setTickets((prevTickets) => {
+            const updatedTickets = prevTickets.filter(
+                (ticket) => ticket.idTicket !== ticketToDelete.idTicket
+            );
+            localStorage.setItem("tickets", JSON.stringify(updatedTickets));
+            return updatedTickets;
+        });
+
+        const updatedNotes = notes.filter(
+            (note) => note.NoteAssignee !== ticketToDelete.assigneeTicket
         );
-        const updatedTickets = tickets.filter(
-            (ticket) => ticket.idTicket !== idTicket
-        );
-        localStorage.setItem("tickets", JSON.stringify(updatedTickets));
+
+        setNotes(updatedNotes);
+        localStorage.setItem("notes", JSON.stringify(updatedNotes));
     };
 
     useEffect(() => {
@@ -266,72 +299,13 @@ export default function ContextAppComponent({
     const [tasks, setTasks] = useState<ITask[]>([]);
     const [task, setTask] = useState<ITask>();
 
-    useEffect(() => {
-        const defaultTask: ITask[] = [
-            {
-                idTask: "asd",
-                idTicket: "ajsn1kasd",
-                titleTask: "Investigate Root Cause",
-                descriptionTask:
-                    "Analyze server logs, error messages, and infrastructure components to identify why the website is down.",
-            },
-            {
-                idTask: "qasda",
-                idTicket: "ajsn1kasd",
-                titleTask: "Restore Web Services",
-                descriptionTask:
-                    "Bring the website back online by restarting services, checking configurations, and verifying connectivity.",
-            },
-            {
-                idTask: "zxcz",
-                idTicket: "ajsn1kasd",
-                titleTask: "Notify Stakeholders",
-                descriptionTask:
-                    "Inform internal teams, stakeholders, and customers about the outage and expected resolution time.",
-            },
-            {
-                idTask: "asdeasf",
-                idTicket: "wzxco1sd",
-                titleTask: "Website Unavailable: Urgent Fix Needed",
-                descriptionTask: "High",
-            },
-            {
-                idTask: "vcbjgfg",
-                idTicket: "wzxco1sd",
-                titleTask: "User Profile Display Issue",
-                descriptionTask:
-                    "User profiles are not rendering correctly on the homepage.",
-            },
-            {
-                idTask: "zxcbthy",
-                idTicket: "wzxco1sd",
-                titleTask: "Image Loading Error",
-                descriptionTask: "Profile images fail to load properly.",
-            },
-            {
-                idTask: "qweasdzvx",
-                idTicket: "wzxco1sd",
-                titleTask: "Non-Functional Edit Button",
-                descriptionTask:
-                    "The edit button in the user profile does not perform any action.",
-            },
-            {
-                idTask: "wzxco1sd",
-                idTicket: "wzxco1sd",
-                titleTask: "Missing Contact Information",
-                descriptionTask:
-                    "Contact information (email and phone number) is absent from the user profile.",
-            },
-        ];
-        setTasks(defaultTask);
-    }, []);
-
     const onClickTask = (task: ITask) => {
         setTask(task);
     };
 
     const updateTasks = (tasks: ITask[]) => {
         setTasks(tasks);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
     };
 
     const handleSubmitTask = (
@@ -446,14 +420,8 @@ export default function ContextAppComponent({
     return (
         <ContextApp.Provider
             value={{
-                hiddenTickets,
-                toggleHiddenTicket,
-                newTicket,
-                toggleNewTicket,
                 ticket,
                 onClickTicket,
-                idTicket,
-                getIdTicket,
                 titleTicket,
                 assigneeTicket,
                 priorityTicket,

@@ -1,17 +1,11 @@
 import { Link } from "react-router-dom";
-import { useContextFnc } from "../../Context";
 import styled from "@emotion/styled";
 import { Navbar, Nav } from "react-bootstrap";
 import { useState } from "react";
 import * as color from "../../Theme";
 
 export const NavBar = () => {
-    const { toggleNewTicket } = useContextFnc();
     const [isOpen, setIsOpen] = useState(false);
-
-    const toggleNewTicketFnc = () => {
-        toggleNewTicket();
-    };
 
     const handleClick = () => {
         setIsOpen(!isOpen);
@@ -34,8 +28,7 @@ export const NavBar = () => {
                         </NavLink>
                         <NavLink
                             as={Link}
-                            to="/Tickets"
-                            onClick={toggleNewTicketFnc}
+                            to="/ticket/form"
                         >
                             New ticket
                         </NavLink>

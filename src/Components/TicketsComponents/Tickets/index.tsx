@@ -3,43 +3,35 @@ import { Ticket } from "../Ticket";
 import styled from "@emotion/styled";
 import * as color from "../../../Theme";
 
-export const Tickets = ({ idFilter }: { idFilter?: string | undefined }) => {
+export const Tickets = () => {
     const { tickets } = useContextFnc();
-
-    const ticketToShow = idFilter
-        ? tickets.filter((ticket) => ticket.idTicket === idFilter)
-        : tickets;
 
     return (
         <Container data-testid="tickets">
-            {!idFilter && (
-                <section>
-                    <Title>Tickets</Title>
-                    <SubTitle>Last tickets</SubTitle>
-                    <UnorderedList>
-                        {tickets.map((ticket) => (
-                            <ListItem key={ticket.idTicket}>
-                                {ticket.titleTicket}
-                            </ListItem>
-                        ))}
-                    </UnorderedList>
-                </section>
-            )}
+            <section>
+                <Title>Tickets</Title>
+                <SubTitle>Last tickets</SubTitle>
+                <UnorderedList>
+                    {tickets.map((ticket) => (
+                        <ListItem key={ticket.idTicket}>
+                            {ticket.titleTicket}
+                        </ListItem>
+                    ))}
+                </UnorderedList>
+            </section>
 
             <div>
-                {!idFilter && <TitleToDo>Your tickets</TitleToDo>}
+                <TitleToDo>Your tickets</TitleToDo>
 
-                <TicketsContainer edit={!idFilter}>
-                    {!idFilter && (
-                        <TitlesTable>
-                            <h4>Tickets</h4>
-                            <h4>Assignee</h4>
-                            <h4>Priority</h4>
-                            <h4>Edit</h4>
-                        </TitlesTable>
-                    )}
+                <TicketsContainer>
+                    <TitlesTable>
+                        <h4>Tickets</h4>
+                        <h4>Assignee</h4>
+                        <h4>Priority</h4>
+                        <h4>Edit</h4>
+                    </TitlesTable>
                     <ContainerTicket>
-                        {ticketToShow.map((ticket) => (
+                        {tickets.map((ticket) => (
                             <Ticket key={ticket.idTicket} ticket={ticket} />
                         ))}
                     </ContainerTicket>
@@ -197,8 +189,7 @@ const TitleToDo = styled.h3`
 `;
 
 const TicketsContainer = styled.section`
-    border: ${({ edit }: { edit: boolean }) =>
-        edit ? ` 2px solid ${color.placeholderColor}` : ""};
+    border: 2px solid ${color.placeholderColor};
     width: 100%;
     border-radius: 0.5rem;
 `;

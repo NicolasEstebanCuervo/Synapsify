@@ -14,10 +14,7 @@ test('Should return to the tickets list view when clicking "Return to tickets"',
                         path="/tickets"
                         element={
                             <>
-                                <FormTickets
-                                    title="Create a ticket"
-                                    subtitle="Create a ticket for your project."
-                                />
+                                <FormTickets />
 
                                 <Tickets />
                             </>
@@ -39,10 +36,7 @@ test('Should return to the tickets list view when clicking "Return to tickets"',
 test('Should show the "Create ticket" button when all inputs have text', async () => {
     render(
         <ContextAppComponent>
-            <FormTickets
-                title="Create a ticket"
-                subtitle="Create a ticket for your project."
-            />
+            <FormTickets />
         </ContextAppComponent>
     );
 
@@ -69,10 +63,7 @@ test("Should display the ticket when the form is submitted", async () => {
                         path="/tickets"
                         element={
                             <>
-                                <FormTickets
-                                    title="Create a ticket"
-                                    subtitle="Create a ticket for your project."
-                                />
+                                <FormTickets />
 
                                 <Tickets />
                             </>
@@ -94,12 +85,8 @@ test("Should display the ticket when the form is submitted", async () => {
     const button = await screen.findByTestId("create-ticket-button");
     fireEvent.click(button);
 
-    await expect(
-        screen.getAllByText(/Important bug/i)[0]
-    ).toBeInTheDocument();
-    await expect(
-        screen.getAllByText(/Important bug/i)[1]
-    ).toBeInTheDocument();
+    await expect(screen.getAllByText(/Important bug/i)[0]).toBeInTheDocument();
+    await expect(screen.getAllByText(/Important bug/i)[1]).toBeInTheDocument();
     await expect(screen.getByText(/Nico Rojas/i)).toBeInTheDocument();
     await expect(screen.getByText(/Very important/i)).toBeInTheDocument();
 });

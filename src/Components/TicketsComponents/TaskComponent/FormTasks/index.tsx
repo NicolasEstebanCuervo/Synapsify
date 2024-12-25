@@ -2,32 +2,19 @@ import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";
 import { ITask, useContextFnc } from "../../../../Context";
 import * as color from "../../../../Theme";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-interface FormTicketsProps {
-    ticketId: string | "";
-    task?: ITask;
-    setEdit?: React.Dispatch<React.SetStateAction<boolean>>;
-    text: string;
-    edit?: boolean;
-}
+export const FormTasks = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const isEdit = location.state?.isEdit;
+    const task = location.state?.task;
 
-export const FormTasks = ({
-    ticketId,
-    task,
-    setEdit,
-    edit,
-    text,
-}: FormTicketsProps) => {
-    const { tasks, updateTasks, toggleHiddenTicket } = useContextFnc();
-    const { handleSubmitTask } = useContextFnc();
+    const { tasks, updateTasks, handleSubmitTask, ticket } = useContextFnc();
     const [titleTask, setTitleTask] = useState(task?.titleTask || "");
     const [descriptionTask, setDescriptionTask] = useState(
         task?.descriptionTask || ""
     );
-
-    const setHidden = () => {
-        toggleHiddenTicket(ticketId);
-    };
 
     const updateTask = (idTask: string) => {
         if (!titleTask.trim() || !descriptionTask.trim()) {
@@ -52,32 +39,43 @@ export const FormTasks = ({
         setTitleTask(e.target.value);
     };
 
-    const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const textarea = e.target;
+
+        textarea.style.height = "auto"; // Restablece la altura para recalcular
+        textarea.style.height = `${textarea.scrollHeight}px`;
         setDescriptionTask(e.target.value);
     };
 
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!setEdit && (!titleTask.trim() || !descriptionTask.trim())) {
+        if (!task && (!titleTask.trim() || !descriptionTask.trim())) {
             return;
         }
 
         if (task) {
             updateTask(task.idTask);
         }
-
-        if (setEdit) {
-            setEdit(false);
+        if (ticket && !isEdit) {
+            handleSubmitTask(titleTask, descriptionTask, ticket?.idTicket);
         }
-        handleSubmitTask(titleTask, descriptionTask, ticketId);
-        setHidden();
+
+        navigate(`/ticket/${ticket?.idTicket}`);
     };
 
     return (
         <Container>
             <FormContainer>
-                <Title>{text}</Title>
-                <Subtitle>Create a task to organize yourself better</Subtitle>
+                {!isEdit ? (
+                    <Title>Create a task</Title>
+                ) : (
+                    <Title>Edit the task</Title>
+                )}
+                {!isEdit ? (
+                    <Subtitle>Create a task for your project.</Subtitle>
+                ) : (
+                    <Subtitle>Edit the task for your project.</Subtitle>
+                )}
                 <Form data-testid="task-form" onSubmit={handleSubmit}>
                     <Input
                         type="text"
@@ -86,25 +84,37 @@ export const FormTasks = ({
                         onChange={handleTitleChange}
                         maxLength={30}
                     />
-                    <Input
-                        type="text"
+                    <TextArea
                         placeholder="Description"
                         value={descriptionTask}
                         onChange={handleDescriptionChange}
-                        maxLength={50}
+                        maxLength={200}
                     />
 
                     {titleTask.length > 0 &&
                         descriptionTask.length > 0 &&
-                        (edit ? (
+                        (isEdit ? (
                             <>
                                 <Button type="submit">Edit task</Button>
                             </>
                         ) : (
                             <>
-                                <Button data-testid="create-task-button" type="submit">Create a task</Button>
+                                <Button
+                                    data-testid="create-task-button"
+                                    type="submit"
+                                >
+                                    Create a task
+                                </Button>
                             </>
                         ))}
+
+                    {isEdit ? (
+                        <></>
+                    ) : (
+                        <Link to={`/ticket/${ticket?.idTicket}`}>
+                            <Button>Return to tickets</Button>
+                        </Link>
+                    )}
                 </Form>
             </FormContainer>
         </Container>
@@ -120,7 +130,7 @@ const Container = styled.section`
 `;
 
 const FormContainer = styled.div`
-    width: 60%;
+    width: 40%;
 
     @media (max-width: 1000px) {
         width: 75%;
@@ -232,6 +242,35 @@ const Input = styled.input`
     }
 `;
 
+const TextArea = styled.textarea`
+    padding: 0.5rem 0.5rem;
+    border-radius: 0.5rem;
+    background: ${color.placeholderColor};
+    border: none;
+    outline: 1px solid ${color.inputBorderColor};
+    color: ${color.textPrimaryColor};
+    font-size: 1.2rem;
+    border: none;
+    resize: none;
+    overflow: hidden;
+
+    @media (max-width: 1000px) {
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 400px) {
+        padding: 0.4rem 0.5rem;
+        font-size: 5vw;
+    }
+
+    @media (max-width: 250px) {
+        font-size: 7vw;
+    }
+`;
 const Button = styled.button`
     width: 100%;
     border-radius: 0.5rem;

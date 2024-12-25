@@ -1,18 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import ContextAppComponent, { ITicket } from "../../../../Context";
+import ContextAppComponent from "../../../../Context";
 import { FormTasks } from ".";
-
-const ticket: ITicket = {
-    idTicket: "ajsn1kasd",
-    titleTicket: "Urgent Fix Needed",
-    assigneeTicket: "John Smith",
-    priorityTicket: "High",
-};
 
 test('Should show the "Create ticket" button when all inputs have text', async () => {
     render(
         <ContextAppComponent>
-            <FormTasks text="Create a task" ticketId={ticket.idTicket} />
+            <FormTasks />
         </ContextAppComponent>
     );
 

@@ -1,93 +1,77 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ITicket, useContextFnc } from "../../../Context";
 import styled from "@emotion/styled";
 import * as color from "../../../Theme";
 import ExitIcon from "../../../Assets/Icons/ExitIcon";
 import EditIcon from "../../../Assets/Icons/EditIcon";
-import { FormTickets } from "../FormTickets";
 
 export const Ticket = ({ ticket }: { ticket: ITicket }) => {
     const {
         onClickTicket,
         ticketDelete,
-        getIdTicket,
         setTitle,
         setAssigneeTicket,
         setPriorityTicket,
     } = useContextFnc();
-    const [edit, setEdit] = useState(false);
+
+    const navigate = useNavigate();
 
     const createTicketPage = () => {
         onClickTicket(ticket);
     };
 
     const onDeleteTicket = () => {
-        ticketDelete(ticket.idTicket);
+        ticketDelete(ticket);
     };
 
     const handleEditar = () => {
-        setEdit(!edit);
-        getIdTicket(ticket.idTicket);
-
+        navigate("/ticket/form", { state: { isEdit: true, ticket:ticket} });
         setTitle(ticket.titleTicket);
         setAssigneeTicket(ticket.assigneeTicket);
         setPriorityTicket(ticket.priorityTicket);
     };
 
     return (
-        <Container edit={!edit}>
-            {edit ? (
-                <>
-                    <FormTickets
-                        title="Edit the ticket"
-                        subtitle="Edit and Manage Your Ticket Details"
-                        ticket={ticket}
-                        setEdit={setEdit}
-                        edit={edit}
-                    />
-                </>
-            ) : (
-                <>
-                    <RowContainer>
-                        {" "}
-                        <LinkRowContainer
-                            to={`/Ticket/${ticket.idTicket}`}
-                            onClick={createTicketPage}
-                            data-testid="ticket-title"
-                        >
-                            <Label>Title:</Label>
+        <Container>
+            <>
+                <RowContainer>
+                    {" "}
+                    <LinkRowContainer
+                        to={`/Ticket/${ticket.idTicket}`}
+                        onClick={createTicketPage}
+                        data-testid="ticket-title"
+                    >
+                        <Label>Title:</Label>
 
-                            {ticket.titleTicket}
-                        </LinkRowContainer>
-                    </RowContainer>
-                    <RowContainer>
-                        <Label>Assignee:</Label>
+                        {ticket.titleTicket}
+                    </LinkRowContainer>
+                </RowContainer>
+                <RowContainer>
+                    <Label>Assignee:</Label>
 
-                        {ticket.assigneeTicket}
-                    </RowContainer>
-                    <RowContainer>
-                        <ContainerPriority>
-                            <LabelPriority>Priority:</LabelPriority>
-                            {ticket.priorityTicket}
-                        </ContainerPriority>
-                    </RowContainer>
-                    <RowContainer>
-                        <Button>
-                            <EditIcon
-                                data-testid="edit-button"
-                                onClick={handleEditar}
-                            />
-                        </Button>
-                        <Button>
-                            <ExitIcon
-                                data-testid="delete-button"
-                                onClick={onDeleteTicket}
-                            />
-                        </Button>
-                    </RowContainer>
-                </>
-            )}
+                    {ticket.assigneeTicket}
+                </RowContainer>
+                <RowContainer>
+                    <ContainerPriority>
+                        <LabelPriority>Priority:</LabelPriority>
+                        {ticket.priorityTicket}
+                    </ContainerPriority>
+                </RowContainer>
+                <RowContainer>
+                    <Button>
+                        <EditIcon
+                            data-testid="edit-button"
+                            onClick={handleEditar}
+                        />
+                    </Button>
+                    <Button>
+                        <ExitIcon
+                            data-testid="delete-button"
+                            onClick={onDeleteTicket}
+                        />
+                    </Button>
+                </RowContainer>
+            </>
         </Container>
     );
 };
@@ -96,14 +80,11 @@ const Container = styled.div`
     text-align: center;
     display: grid;
 
-    grid-template-columns: ${({ edit }: { edit: boolean }) =>
-        edit ? `repeat(4, 1fr)` : ``};
+    grid-template-columns: repeat(4, 1fr);
 
-    border-top: ${({ edit }: { edit: boolean }) =>
-        edit ? `1px solid ${color.ticketBorderColor}` : ``};
+    border-top: 1px solid ${color.ticketBorderColor};
 
-    border-bottom: ${({ edit }: { edit: boolean }) =>
-        edit ? `1px solid ${color.ticketBorderColor}` : ``};
+    border-bottom: 1px solid ${color.ticketBorderColor};
 
     &:last-child {
         border-bottom: 0px;

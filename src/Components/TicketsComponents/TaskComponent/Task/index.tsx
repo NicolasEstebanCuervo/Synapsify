@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { ITask, useContextFnc } from "../../../../Context";
 import styled from "@emotion/styled";
-import { FormTasks } from "../FormTasks";
 import ExitIcon from "../../../../Assets/Icons/ExitIcon";
 import * as color from "../../../../Theme";
 import EditIcon from "../../../../Assets/Icons/EditIcon";
+import { useNavigate } from "react-router-dom";
 
 export const Task = ({ task }: { task: ITask }) => {
     const { taskDelete } = useContextFnc();
-    const [edit, setEdit] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const savedCheckboxValue = localStorage.getItem(
@@ -33,52 +34,40 @@ export const Task = ({ task }: { task: ITask }) => {
         );
     };
 
-    const handleEdit = () => {
-        setEdit(true);
+    const editTask = () => {
+        navigate("/task/form", { state: { isEdit: true, task: task } });
     };
 
     return (
         <Container>
-            {edit ? (
-                <>
-                    <FormTasks
-                        text="Edit the task"
-                        ticketId=""
-                        task={task}
-                        setEdit={setEdit}
-                        edit={edit}
+            <TaskContainer>
+                <InfoTask>
+                    <Input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={handleCheckboxChange}
+                        data-testid="check-box"
                     />
-                </>
-            ) : (
-                <TaskContainer>
-                    <InfoTask>
-                        <Input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={handleCheckboxChange}
-                            data-testid="check-box"
-                        />
-                        <TextTask>
-                            <Title>{task.titleTask}</Title>
-                            <Description>{task.descriptionTask}</Description>
-                        </TextTask>
-                    </InfoTask>
-                    <TaskButtons>
-                        <Button>
-                            <EditIcon
-                                data-testid="edit-button"
-                                onClick={handleEdit}
-                            ></EditIcon>
-                        </Button>
-                        <Button>
-                            <ExitIcon
-                                data-testid="delete-button"
-                                onClick={taskDeleteFnc}
-                            ></ExitIcon>
-                        </Button>
-                    </TaskButtons>
-                </TaskContainer>
-            )}
+                    <TextTask>
+                        <Title>{task.titleTask}</Title>
+                        <Description>{task.descriptionTask}</Description>
+                    </TextTask>
+                </InfoTask>
+                <TaskButtons>
+                    <Button>
+                        <EditIcon
+                            data-testid="edit-button"
+                            onClick={()=>editTask()}
+                        ></EditIcon>
+                    </Button>
+                    <Button>
+                        <ExitIcon
+                            data-testid="delete-button"
+                            onClick={taskDeleteFnc}
+                        ></ExitIcon>
+                    </Button>
+                </TaskButtons>
+            </TaskContainer>
         </Container>
     );
 };
