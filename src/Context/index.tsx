@@ -172,7 +172,6 @@ export default function ContextAppComponent({
     const [assigneeTicket, setAssigneeTicket] = useState("");
     const [priorityTicket, setPriorityTicket] = useState("");
     const [tickets, setTickets] = useState<ITicket[]>([]);
-    const [idTicket, setIdTicket] = useState("");
 
     const onClickTicket = (ticket: ITicket) => {
         setTicket(ticket);
@@ -273,11 +272,13 @@ export default function ContextAppComponent({
             localStorage.setItem("tickets", JSON.stringify(updatedTickets));
             return updatedTickets;
         });
-
-        const updatedNotes = notes.filter(
-            (note) => note.NoteAssignee !== ticketToDelete.assigneeTicket
-        );
-
+        const updatedNotes = notes.map((note) => {
+            if (note.NoteAssignee === ticketToDelete.assigneeTicket) {
+                return { ...note, NoteAssignee: "Unassigned" };
+            }
+            return note;
+        });
+        
         setNotes(updatedNotes);
         localStorage.setItem("notes", JSON.stringify(updatedNotes));
     };
@@ -399,9 +400,12 @@ export default function ContextAppComponent({
         setNotes((prevNotes) =>
             prevNotes.filter((note) => note.idNote !== idNote)
         );
+
         const updatedNotes = notes.filter(
-            (ticket) => ticket.idNote !== idTicket
+            (notes) => notes.idNote !== idNote  
         );
+
+        console.log(updatedNotes)
         localStorage.setItem("notes", JSON.stringify(updatedNotes));
     };
 
