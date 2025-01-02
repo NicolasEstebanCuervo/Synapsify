@@ -8,85 +8,94 @@ export const ContentIndex = () => {
             <HeaderTitles>
                 <Title>Synapsify</Title>
                 <Subtitle>
-                    Sail the tide of productivity with Sinapsify.
+                    Sail the tide of productivity with Synapsify.
                 </Subtitle>
             </HeaderTitles>
 
             <SubContainer>
-            <IndividualContainer>
-                <TextContainer>
-                    <TitleContent>
-                        Get Things Done Together: Synapsify's Ticket Power!
-                    </TitleContent>
-                    <TextContent>
-                        In Synapsify, tickets serve as the backbone of organized
-                        teamwork. From creation to resolution, Synapsify
-                        facilitates collaboration among team members to address
-                        requests, issues, or any pending tasks efficiently. With
-                        Synapsify, you can assign tickets to specific team
-                        members, set priorities and deadlines, and track
-                        progress in real time. This capability for organized
-                        teamwork ensures equitable task distribution, clear
-                        communication, and swift and effective issue resolution.
-                        Synapsify helps keep your team synchronized and focused
-                        on achieving common goals.
-                    </TextContent>
-                    <Link to="Tickets">
-                        <Button>Get Rolling!</Button>
-                    </Link>
-                </TextContainer>
-                <Image
-                    src={require("../../Assets/Images/Tickets.png")}
-                    alt=""
-                />
-            </IndividualContainer>
+                <IndividualContainer>
+                    <TextContainer>
+                        <TitleContent>
+                            Get Things Done Together: Synapsify's Ticket Power!
+                        </TitleContent>
+                        <TextContent>
+                            In Synapsify, tickets serve as the backbone of
+                            organized teamwork. From creation to resolution,
+                            Synapsify facilitates collaboration among team
+                            members to address requests, issues, or any pending
+                            tasks efficiently. With Synapsify, you can assign
+                            tickets to specific team members, set priorities and
+                            deadlines, and track progress in real time. This
+                            capability for organized teamwork ensures equitable
+                            task distribution, clear communication, and swift
+                            and effective issue resolution. Synapsify helps keep
+                            your team synchronized and focused on achieving
+                            common goals.
+                        </TextContent>
+                        <Link to="Tickets">
+                            <Button>Get Rolling!</Button>
+                        </Link>
+                    </TextContainer>
+                    <Image
+                        src={require("../../Assets/Images/Tickets.png")}
+                        alt=""
+                    />
+                </IndividualContainer>
 
-            <IndividualContainer>
-                <Image src={require("../../Assets/Images/Tasks.png")} alt="" />
-                <TextContainer>
-                    <TitleContent>
-                        Stay on Top: Conquer Tasks with Synapsify!
-                    </TitleContent>
-                    <TextContent>
-                        The task list feature in Synapsify is your ally for
-                        organizing and completing your daily activities
-                        effectively. With Synapsify, you can create customized
-                        task lists, assign tasks to yourself or other team
-                        members, set deadlines, and track progress in real time.
-                        From complex projects to simple pending tasks, Synapsify
-                        helps you maintain focus and productivity by offering a
-                        clear view of what needs to be done and when.
-                    </TextContent>
-                    <Link to="/Tickets">
-                        <Button>Make It Happen!</Button>
-                    </Link>
-                </TextContainer>
-            </IndividualContainer>
+                <IndividualContainer>
+                    <Image
+                        src={require("../../Assets/Images/Tasks.png")}
+                        alt=""
+                    />
+                    <TextContainer>
+                        <TitleContent>
+                            Stay on Top: Conquer Tasks with Synapsify!
+                        </TitleContent>
+                        <TextContent>
+                            The task list feature in Synapsify is your ally for
+                            organizing and completing your daily activities
+                            effectively. With Synapsify, you can create
+                            customized task lists, assign tasks to yourself or
+                            other team members, set deadlines, and track
+                            progress in real time. From complex projects to
+                            simple pending tasks, Synapsify helps you maintain
+                            focus and productivity by offering a clear view of
+                            what needs to be done and when.
+                        </TextContent>
+                        <Link to="/Tickets">
+                            <Button>Make It Happen!</Button>
+                        </Link>
+                    </TextContainer>
+                </IndividualContainer>
 
-            <IndividualContainer>
-                <TextContainer>
-                    <TitleContent>
-                        Brainstorms to Brilliance: Synapsify's Note-taking
-                        Magic!
-                    </TitleContent>
-                    <TextContent>
-                        In Synapsify, taking notes is key to capturing ideas,
-                        reminders, and any information relevant to your projects
-                        and tasks. With Synapsify, you can quickly create notes,
-                        organize them into categories or tags, and access them
-                        easily when needed. Whether during a meeting, on a phone
-                        call, or simply while working on your projects,
-                        Synapsify enables you to keep your thoughts and data
-                        organized and accessible. Additionally, you can share
-                        your notes with colleagues or collaborators for better
-                        team collaboration and communication.
-                    </TextContent>
-                    <Link to="/Notes">
-                        <Button>Write Your Story!</Button>
-                    </Link>
-                </TextContainer>
-                <Image src={require("../../Assets/Images/Notes.png")} alt="" />
-            </IndividualContainer>
+                <IndividualContainer>
+                    <TextContainer>
+                        <TitleContent>
+                            Brainstorms to Brilliance: Synapsify's Note-taking
+                            Magic!
+                        </TitleContent>
+                        <TextContent>
+                            In Synapsify, taking notes is key to capturing
+                            ideas, reminders, and any information relevant to
+                            your projects and tasks. With Synapsify, you can
+                            quickly create notes, organize them into categories
+                            or tags, and access them easily when needed. Whether
+                            during a meeting, on a phone call, or simply while
+                            working on your projects, Synapsify enables you to
+                            keep your thoughts and data organized and
+                            accessible. Additionally, you can share your notes
+                            with colleagues or collaborators for better team
+                            collaboration and communication.
+                        </TextContent>
+                        <Link to="/Notes">
+                            <Button>Write Your Story!</Button>
+                        </Link>
+                    </TextContainer>
+                    <Image
+                        src={require("../../Assets/Images/Notes.png")}
+                        alt=""
+                    />
+                </IndividualContainer>
             </SubContainer>
         </Container>
     );
